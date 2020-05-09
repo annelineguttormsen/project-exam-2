@@ -7,7 +7,7 @@ export default function Footer() {
         <div className="col-12 footer container">
             <img className="footer__logo" alt="Holidaze" src={logo}/>
             <ul className="footer__list">
-                <li className="footer__list__element"><Link to="#">Contact us</Link></li>
+                <li className="footer__list__element"><Link to="/contact">Contact us</Link></li>
                 <li className="footer__list__element"><Link to="#">Terms of Use</Link></li>
                 <li className="footer__list__element"><Link to="#">Log in</Link></li>
             </ul>
