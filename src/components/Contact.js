@@ -1,8 +1,7 @@
-import React, { useState } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
-import axios from "axios";
 
 import ErrorMessage from "./ErrorMessage";
 
@@ -12,31 +11,19 @@ const schema = yup.object().shape({
 	message: yup.string().required("Message is required")
 });
 
-const API_PATH = "localhost/contact-success.php";
+const API_PATH = "contact-success.php";
 
 export default function Contact() {
-    const [state, setState] = useState({ data: "" });
-
     const { register, handleSubmit, errors } = useForm({
         validationSchema: schema
     });
 
     function onSubmit(data, event) {
         event.preventDefault();
-        axios({
-            method: "POST",
-            url: `${API_PATH}`,
-            headers: { "content-type": "application/json" },
-            data: data
-        })
-        .then(result => {
-            console.log(data);
-        })
-        .catch(error => setState({ error: error.message }));
     }
     return (
         <div className="col-12 contact">
-            <div className="col-6 container">
+            <div className="col-6 col-md-8 col-sm-12 container">
                 <div className="breadcrumbs">
                     <ul>
                         <li className="breadcrumbs__link"><Link to="/">Home</Link></li><span>></span>
@@ -45,8 +32,8 @@ export default function Contact() {
                 </div>
                 <h1 className="contact__title">How can we help?</h1>
                 <form 
-                    /* method="POST" 
-                    action="contact-success.php" */
+                    method="POST" 
+                    action={API_PATH}
                     onSubmit={handleSubmit(onSubmit)}
                     className="contact__form"
                 >
@@ -70,7 +57,7 @@ export default function Contact() {
                     />
                     {errors.email && <ErrorMessage text={errors.email.message}/>}
                     <label>Message <span>*</span></label>
-                    <textarea 
+                    <textarea
                         name="message" 
                         id="message" 
                         className="col-12 contact__form__textarea" 
@@ -79,7 +66,10 @@ export default function Contact() {
                     {errors.clientName && <ErrorMessage text={errors.message.message}/>}
                     <button 
                         type="submit" 
-                        className="btn btn--success btn--big contact__form__btn"><p>Send message</p></button>
+                        className="btn btn--success btn--big contact__form__btn"
+                    >
+                        <p>Send message</p>
+                    </button>
                 </form>
             </div>
         </div>

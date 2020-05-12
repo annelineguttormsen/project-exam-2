@@ -211,6 +211,9 @@ input[type=radio] {
   display: block;
   border-radius: 20px;
 }
+.hero label {
+  color: white;
+}
 
 .contact__form__textarea {
   min-height: 200px;
@@ -247,6 +250,9 @@ input[type=radio] {
 .hotelinformation__article__text {
   padding: 5px 0px;
   line-height: 1.5;
+}
+.hotelinformation__article #map {
+  border: none;
 }
 
 .footer {

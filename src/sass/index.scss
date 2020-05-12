@@ -147,6 +147,9 @@ input[type="radio"] {
             border-radius:20px;
         }
     }
+    label {
+        color:white;
+    }
 }
 .contact {
     &__form {
@@ -196,6 +199,9 @@ input[type="radio"] {
         &__text {
             padding:5px 0px;
             line-height:1.5;
+        }
+        #map {
+            border:none;
         }
     }
 }
