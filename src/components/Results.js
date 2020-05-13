@@ -1,5 +1,7 @@
-import React, { useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+
+import ResultsArticle from "./ResultsArticle";
 
 export default function Results() {
     let searchTerm = localStorage.getItem("searchTerm");
@@ -8,22 +10,53 @@ export default function Results() {
     let adults = localStorage.getItem("adults");
     let children = localStorage.getItem("children");
 
+    let [state, setState] = useState({
+        establishments: ["peepee","poopoo"]
+    });
+    let [constantArray,setConstantArray] = useState({
+        establishments: []
+    });
+
     function setLS(event, name) {
         let value = event.target.value;
         localStorage.setItem(name,value);
     }
 
+    function filterArray() {
+        let query = searchTerm;
+        console.log("query er", query);
+        let filteredArray = constantArray.establishments;
+        console.log("filteredarray før filter: ", filteredArray);
+        filteredArray = filteredArray.filter((i)=> {
+            if (i.toLowerCase().indexOf(query)!== -1) {
+                return i;
+            }
+        });
+        console.log("filtered array etter: ", filteredArray);
+        setState({establishments: filteredArray});
+    }
+
+    //thank you https://dev.to/shoupn/javascript-fetch-api-and-using-asyncawait-47mp
+    async function getEstablishments() {
+        let response = await fetch("establishments.json");
+        let data = await response.json();
+        await setState({establishments : data});
+        console.log("state data er nå", state.establishments)
+        return data;
+    }
+
     useEffect(
         function() {
-            fetch("establishments.json")
-            .then(response => response.json())
-            .then(response => console.log(response));
-            /* .then(function(games){
-                setState({games: games});
-                setConstantArray({gameArray: games});
-            }); */
-        }, []
-    );
+            getEstablishments()
+                .then(data => console.log(data))
+                .then(data =>
+                    setState({establishments:data})
+                )
+                .then(setTimeout(function() {
+                    console.log("state data er nå", state.establishments)
+                }, 5000));
+        },[]
+    ); 
 
     return (
         <div className="col-6 col-md-8 col-sm-12 container">
@@ -39,45 +72,50 @@ export default function Results() {
                         className="col-12 small__search__form__input"  
                         type="text" 
                         placeholder="Hotel" 
-                        value={searchTerm}
+                        defaultValue={searchTerm}
                         onChange={(event) => setLS(event, "searchTerm")}
                     />
                     <input 
                         className="col-6 small__search__form__input" 
                         type="date" 
-                        value={fromDate}
+                        defaultValue={fromDate}
                         onChange={(event) => setLS(event, "fromDate")}
                     />
                     <input 
                         className="col-6 small__search__form__input" 
                         type="date" 
-                        value={toDate}
+                        defaultValue={toDate}
                         onChange={(event) => setLS(event, "toDate")}
                     />
-                    <select className="col-5 small__search__form__select" name="Adults" value={adults}>
-                        <option value="1">1</option>
-                        <option value="2" selected>2</option>
-                        <option value="3">3</option>
-                        <option value="4">4</option>
-                    </select> 
-                    <select className="col-5 small__search__form__select" name="Children" value={children}>
-                        <option value="1">1</option>
-                        <option value="2">2</option>
-                        <option value="3">3</option>
-                        <option value="4">4</option>
-                    </select> 
+                    <input 
+                        className="col-5 small__search__form__select" 
+                        type="number"
+                        name="Adults"
+                        min="1"
+                        max="10"
+                        defaultValue={adults}
+                    />
+                    <input 
+                        className="col-5 small__search__form__select" 
+                        type="number"
+                        name="Children"
+                        min="1"
+                        max="10"
+                        defaultValue={children}
+                    />
                 </form>
             </div>
             <h1>Search results for '{searchTerm}'</h1>
             <div className="col-12 results">
-                {/* TODO: ENDRE DETTE TIL Å TILKALLE RESULTSARTICLE */}
-                <div className="col-12 results__article">
-                    <div className="col-6 results__article__image"></div>
-                    <div className="col-6 results__article__desc">
-                        <h2>Sunsssset Beach</h2>
-                        <p>Get ready for some amazing sunsets as you sip a cocktail and watch dolphins play in the harbour below.</p>
-                    </div>
-                </div>
+                {/*
+                    state.establishments.map(
+                        i => <ResultsArticle
+                            establishmentName={i.establishmentName}
+                            price={i.price}
+                            maxGuests={i.maxGuests}
+                        />
+                    )
+                */}
             </div>
         </div>
     )  

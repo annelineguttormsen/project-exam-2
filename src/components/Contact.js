@@ -11,8 +11,6 @@ const schema = yup.object().shape({
 	message: yup.string().required("Message is required")
 });
 
-const API_PATH = "contact-success.php";
-
 export default function Contact() {
     const { register, handleSubmit, errors } = useForm({
         validationSchema: schema
@@ -33,7 +31,7 @@ export default function Contact() {
                 <h1 className="contact__title">How can we help?</h1>
                 <form 
                     method="POST" 
-                    action={API_PATH}
+                    action="contact-success.php"
                     onSubmit={handleSubmit(onSubmit)}
                     className="contact__form"
                 >
