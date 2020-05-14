@@ -235,6 +235,21 @@ input[type=radio] {
   display: block;
 }
 
+.account__menu {
+  border-bottom: 1px solid #ECECEC;
+  margin-bottom: 30px;
+}
+.account__menu__list li {
+  display: inline-block;
+  padding-right: 7px;
+  padding-bottom: 5px;
+}
+.account__menu__list li a {
+  text-decoration: none;
+  color: black;
+  font-weight: 500;
+}
+
 .results__article__image {
   background: url("https://images.unsplash.com/photo-1439130490301-25e322d88054?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1489&q=80") no-repeat center center;
   background-size: cover;

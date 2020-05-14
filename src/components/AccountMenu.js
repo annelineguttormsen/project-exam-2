@@ -5,7 +5,7 @@ export default function AccountMenu(props) {
     return (
         <div className="col-12 account__menu">
             <h1>{props.title}</h1>
-            <ul>
+            <ul className="account__menu__list">
                 <li><Link to="/enquiries">Enquiries</Link></li>
                 <li><Link to="/messages">Messages</Link></li>
                 <li><Link to="/addestablishment">Add establishment</Link></li>

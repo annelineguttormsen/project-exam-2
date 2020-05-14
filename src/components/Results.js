@@ -13,16 +13,18 @@ export default function Results() {
     let { id } = useParams();
     console.log("parametre for siden er ", id);
 
-    let searchTerm = id.match(/search=(.*)&&fromDate/)[1];
-    let fromDate = id.match(/fromDate=(.*)&&toDate/)[1];
-    let toDate = id.match(/toDate=(.*)&&adults/)[1];
-    let adults = id.match(/adults=(.*)&&children/)[1];
+    let search = id.match(/search=(.*)&fromDate/)[1];
+    let fromDate = id.match(/fromDate=(.*)&toDate/)[1];
+    let toDate = id.match(/toDate=(.*)&adults/)[1];
+    let adults = id.match(/adults=(.*)&children/)[1];
     let children = id.match(/children=(.*)/)[1];
-    console.log(searchTerm, fromDate, toDate, adults, children);
+    console.log(search, fromDate, toDate, adults, children);
 
     let [state, setState] = useState({
-        establishments: []
+        data: establishments
     });
+
+    console.log(state.establishments);
 
     function setLS(event, name) {
         let value = event.target.value;
@@ -33,7 +35,7 @@ export default function Results() {
         let filteredArray = establishments;
         console.log("filteredarray før filter: ", filteredArray);
         filteredArray = filteredArray.filter((i) => {
-            if (i.establishmentName.toLowerCase().indexOf(searchTerm)!== -1) {
+            if (i.establishmentName.toLowerCase().indexOf(search)!== -1) {
                 return i;
             }
         });
@@ -61,8 +63,8 @@ export default function Results() {
                         className="col-12 small__search__form__input"  
                         type="text" 
                         placeholder="Hotel" 
-                        defaultValue={searchTerm}
-                        onChange={(event) => setLS(event, "searchTerm")}
+                        defaultValue={search}
+                        onChange={(event) => setLS(event, "search")}
                     />
                     <input 
                         className="col-6 small__search__form__input" 
@@ -94,7 +96,7 @@ export default function Results() {
                     />
                 </form>
             </div>
-            <h1>Search results for '{searchTerm}'</h1>
+            <h1>Search results for '{search}'</h1>
             <div className="col-12 results">
                 {/*
                     state.establishments.map(

@@ -28,12 +28,13 @@ function App() {
           <Switch>
             <Route component={Hero} path="/" exact/>
             <Route component={Contact} path="/contact"/>
-            <Route path="/results/:id" children={<Results/>}/>
+            
             <Route component={Login} path="/login"/>
             <Route component={Enquiries} path="/enquiries"/>
             <Route component={Messages} path="/messages"/>
             <Route component={AddEstablishment} path="/addestablishment"/>
             <Route component={HotelInformation} path="/hotelinformation"/>
+            <Route path="/results/:id" children={<Results/>}/>
             {/* <Route component={NoMatch} path="*"/> */}
           </Switch>
         <Footer/>
