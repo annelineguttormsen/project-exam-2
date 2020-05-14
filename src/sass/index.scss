@@ -47,6 +47,7 @@ input[type="radio"] {
 }
 .errormessage {
     color:$red;
+    display:inline-block;
 }
 .btn {
     border-radius:15px;

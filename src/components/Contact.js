@@ -35,7 +35,7 @@ export default function Contact() {
                     onSubmit={handleSubmit(onSubmit)}
                     className="contact__form"
                 >
-                    <label>Full name <span>*</span></label>
+                    <label>Full name <span>* </span>{errors.clientName && <ErrorMessage text={errors.clientName.message}/>}
                     <input 
                         className="col-12 contact__form__input" 
                         autoComplete="off"
@@ -43,25 +43,22 @@ export default function Contact() {
                         name="clientName" 
                         id="clientName"
                         ref={register({required:true})}
-                    />
-                    {errors.clientName && <ErrorMessage text={errors.clientName.message}/>}
-                    <label>E-mail <span>*</span></label>
+                    /></label>
+                    <label>E-mail <span>* </span>{errors.email && <ErrorMessage text={errors.email.message}/>}
                     <input 
                         className="col-12 contact__form__input" 
                         type="text" 
                         name="email" 
                         id="email"
                         ref={register({required:true})}
-                    />
-                    {errors.email && <ErrorMessage text={errors.email.message}/>}
-                    <label>Message <span>*</span></label>
+                    /></label>
+                    <label>Message <span>* </span>{errors.clientName && <ErrorMessage text={errors.message.message}/>}
                     <textarea
                         name="message" 
                         id="message" 
                         className="col-12 contact__form__textarea" 
                         ref={register({required:true})}
-                    />
-                    {errors.clientName && <ErrorMessage text={errors.message.message}/>}
+                    /></label>
                     <button 
                         type="submit" 
                         className="btn btn--success btn--big contact__form__btn"

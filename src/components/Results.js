@@ -1,19 +1,26 @@
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { 
+    Link,
+    useParams
+} from "react-router-dom";
 
 import ResultsArticle from "./ResultsArticle";
 
 export default function Results() {
-    let searchTerm = localStorage.getItem("searchTerm");
-    let fromDate = localStorage.getItem("fromDate");
-    let toDate = localStorage.getItem("toDate");
-    let adults = localStorage.getItem("adults");
-    let children = localStorage.getItem("children");
+    let establishments = require("./establishments.json");
+    console.log(establishments);
+
+    let { id } = useParams();
+    console.log("parametre for siden er ", id);
+
+    let searchTerm = id.match(/search=(.*)&&fromDate/)[1];
+    let fromDate = id.match(/fromDate=(.*)&&toDate/)[1];
+    let toDate = id.match(/toDate=(.*)&&adults/)[1];
+    let adults = id.match(/adults=(.*)&&children/)[1];
+    let children = id.match(/children=(.*)/)[1];
+    console.log(searchTerm, fromDate, toDate, adults, children);
 
     let [state, setState] = useState({
-        establishments: ["peepee","poopoo"]
-    });
-    let [constantArray,setConstantArray] = useState({
         establishments: []
     });
 
@@ -23,12 +30,10 @@ export default function Results() {
     }
 
     function filterArray() {
-        let query = searchTerm;
-        console.log("query er", query);
-        let filteredArray = constantArray.establishments;
+        let filteredArray = establishments;
         console.log("filteredarray før filter: ", filteredArray);
-        filteredArray = filteredArray.filter((i)=> {
-            if (i.toLowerCase().indexOf(query)!== -1) {
+        filteredArray = filteredArray.filter((i) => {
+            if (i.establishmentName.toLowerCase().indexOf(searchTerm)!== -1) {
                 return i;
             }
         });
@@ -36,25 +41,9 @@ export default function Results() {
         setState({establishments: filteredArray});
     }
 
-    //thank you https://dev.to/shoupn/javascript-fetch-api-and-using-asyncawait-47mp
-    async function getEstablishments() {
-        let response = await fetch("establishments.json");
-        let data = await response.json();
-        await setState({establishments : data});
-        console.log("state data er nå", state.establishments)
-        return data;
-    }
-
-    useEffect(
+    useEffect( 
         function() {
-            getEstablishments()
-                .then(data => console.log(data))
-                .then(data =>
-                    setState({establishments:data})
-                )
-                .then(setTimeout(function() {
-                    console.log("state data er nå", state.establishments)
-                }, 5000));
+            filterArray();
         },[]
     ); 
 

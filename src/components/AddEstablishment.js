@@ -43,7 +43,7 @@ export default function AddEstablishment() {
                 action="add-establishments-success.php"
                 onSubmit={handleSubmit(onSubmit)}
             >
-                <label htmlFor="establishmentName">Establishment name <span>*</span>
+                <label htmlFor="establishmentName">Establishment name <span>* </span>{errors.establishmentName && <ErrorMessage text={errors.establishmentName.message}/>}
                 <input 
                     className="col-12" 
                     type="text" 
@@ -51,8 +51,7 @@ export default function AddEstablishment() {
                     id="establishmentName"
                     ref={register({required:true})}
                 /></label>
-                {errors.establishmentName && <ErrorMessage text={errors.establishmentName.message}/>}
-                <label htmlFor="establishmentEmail">Establishment e-mail <span>*</span>
+                <label htmlFor="establishmentEmail">Establishment e-mail <span>* </span>{errors.establishmentEmail && <ErrorMessage text={errors.establishmentEmail.message}/>}
                 <input 
                     className="col-12" 
                     type="text" 
@@ -60,8 +59,7 @@ export default function AddEstablishment() {
                     id="establishmentEmail"
                     ref={register({required:true})}
                 /></label>
-                {errors.establishmentEmail && <ErrorMessage text={errors.establishmentEmail.message}/>}
-                <label htmlFor="imageUrl">Image URL <span>*</span>
+                <label htmlFor="imageUrl">Image URL <span>* </span>{errors.imageUrl && <ErrorMessage text={errors.imageUrl.message}/>}
                 <input 
                     className="col-12" 
                     type="text" 
@@ -69,8 +67,7 @@ export default function AddEstablishment() {
                     id="imageUrl"
                     ref={register({required:true})}
                 /></label>
-                {errors.imageUrl && <ErrorMessage text={errors.imageUrl.message}/>}
-                <label htmlFor="price">Price per person per night <span>*</span>
+                <label htmlFor="price">Price per person per night <span>* </span>{errors.price && <ErrorMessage text={errors.price.message}/>}
                 <input 
                     className="col-12" 
                     type="text" 
@@ -78,8 +75,7 @@ export default function AddEstablishment() {
                     id="price"
                     ref={register({required:true})}
                 /></label>
-                {errors.price && <ErrorMessage text={errors.price.message}/>}
-                <label htmlFor="maxGuests">Maximum number of guests <span>*</span>
+                <label htmlFor="maxGuests">Maximum number of guests <span>* </span>{errors.maxGuests && <ErrorMessage text={errors.maxGuests.message}/>}
                 <input 
                     className="col-12" 
                     type="text" 
@@ -87,8 +83,7 @@ export default function AddEstablishment() {
                     id="maxGuests"
                     ref={register({required:true})}
                 /></label>
-                {errors.maxGuests && <ErrorMessage text={errors.maxGuests.message}/>}
-                <label htmlFor="googleLat">Google Maps coordinates latitude <span>*</span>
+                <label htmlFor="googleLat">Google Maps coordinates latitude <span>* </span>{errors.googleLat && <ErrorMessage text={errors.googleLat.message}/>}
                 <input 
                     className="col-12" 
                     type="text" 
@@ -96,8 +91,7 @@ export default function AddEstablishment() {
                     id="googleLat"
                     ref={register({required:true})}
                 /></label>
-                {errors.googleLat && <ErrorMessage text={errors.googleLat.message}/>}
-                <label htmlFor="googleLong">Google Maps coordinates longitude <span>*</span>
+                <label htmlFor="googleLong">Google Maps coordinates longitude <span>* </span>{errors.googleLong && <ErrorMessage text={errors.googleLong.message}/>}
                 <input 
                     className="col-12" 
                     type="text" 
@@ -105,16 +99,14 @@ export default function AddEstablishment() {
                     id="googleLong"
                     ref={register({required:true})}
                 /></label>
-                {errors.googleLong && <ErrorMessage text={errors.googleLong.message}/>}
-                <label htmlFor="description">Property description <span>*</span>
+                <label htmlFor="description">Property description <span>* </span>{errors.description && <ErrorMessage text={errors.description.message}/>}
                 <textarea 
                     className="col-12" 
                     name="description" 
                     id="description"
                     ref={register({required:true})}
                 /></label>
-                {errors.description && <ErrorMessage text={errors.description.message}/>}
-                <label>Does your property offer self catering? <span>*</span></label>
+                <label>Does your property offer self catering? <span>* </span></label>{errors.selfCatering && <ErrorMessage text={errors.selfCatering.message}/>}
                 <br/>
                 <label>
                     <input 
@@ -131,7 +123,7 @@ export default function AddEstablishment() {
                         value="false"
                     />No
                 </label>
-                {errors.selfCatering && <ErrorMessage text={errors.selfCatering.message}/>}
+                
                 <br/>
                 <label>ID</label>
                 <input type="number" name="id" id="id" min="1" defaultValue="1"/>

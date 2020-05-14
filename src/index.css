@@ -106,6 +106,7 @@ input[type=radio] {
 
 .errormessage {
   color: #F23827;
+  display: inline-block;
 }
 
 .btn {
