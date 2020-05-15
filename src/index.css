@@ -237,7 +237,6 @@ input[type=radio] {
 
 .account__menu {
   border-bottom: 1px solid #ECECEC;
-  margin-bottom: 30px;
 }
 .account__menu__list li {
   display: inline-block;
@@ -248,6 +247,14 @@ input[type=radio] {
   text-decoration: none;
   color: black;
   font-weight: 500;
+}
+
+.enquiries__article {
+  padding: 7px 0px;
+  border-bottom: 1px solid #ECECEC;
+}
+.enquiries__article td {
+  padding: 5px 7px 5px 0px;
 }
 
 .results__article__image {
