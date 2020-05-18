@@ -9,7 +9,7 @@ export default function Footer() {
             <ul className="footer__list">
                 <li className="footer__list__element"><Link to="/contact">Contact us</Link></li>
                 <li className="footer__list__element"><Link to="#">Terms of Use</Link></li>
-                <li className="footer__list__element"><Link to="#">Account</Link></li>
+                <li className="footer__list__element"><Link to="/login">Account</Link></li>
             </ul>
         </div>
     )
