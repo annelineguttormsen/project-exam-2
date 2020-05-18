@@ -12,16 +12,24 @@ const schema = yup.object().shape({
 
 export default function Login() {
     console.log("Brukernavn og passord er \"admin\"")
+    const history = useHistory();
+
+    //sjekk om bruker er logget inn
+    if (localStorage.getItem("loggedIn")) {
+        history.replace("/enquiries");
+    } else {
+        console.log("Ikke logget inn");
+    }
 
     const { register, handleSubmit, errors } = useForm({
         validationSchema: schema
     });
 
-    const history = useHistory();
 
     const onSubmit = (data, event) => {
         //av en eller annen grunn MÅ jeg ha data i argumenter
         if (event.target[0].value === "admin" && event.target[1].value === "admin") {
+            localStorage.setItem("loggedIn",true);
             history.push("/login");
             history.replace("/enquiries");
         } else {

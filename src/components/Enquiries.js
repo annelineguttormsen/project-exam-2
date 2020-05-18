@@ -1,10 +1,19 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 
 import AccountMenu from "./AccountMenu";
 import EnquiriesArticle from "./EnquiriesArticle";
 
 export default function Enquiries() {
+    const history = useHistory();
+
+    //sjekk om bruker er logget inn
+    if (localStorage.getItem("loggedIn")) {
+        console.log("Bruker er logget inn");
+    } else {
+        history.replace("/login");
+    }
+
     let enquiries = require("./enquiries.json");
     console.log(enquiries);
     return (
