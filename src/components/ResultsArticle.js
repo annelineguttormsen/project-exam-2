@@ -7,7 +7,7 @@ export default function ResultsArticle(props) {
             <div className="col-6 results__article__desc">
                 <h2>{props.establishmentName}</h2>
                 <p>${props.price}</p>
-                <p>{props.maxGuests}</p>
+                <p>{props.maxGuests}</p> 
             </div>
         </div>
     )

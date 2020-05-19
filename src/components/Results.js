@@ -5,26 +5,27 @@ import {
 } from "react-router-dom";
 
 import ResultsArticle from "./ResultsArticle";
+let establishments = require("./establishments.json");
+
 
 export default function Results() {
-    let establishments = require("./establishments.json");
-    console.log(establishments);
+    console.log("establishments filen", establishments);
 
     let { id } = useParams();
-    console.log("parametre for siden er ", id);
 
     let search = id.match(/search=(.*)&fromDate/)[1];
+    //bytt _ til mellomrom
+    search = search.replace(/_/g, " ");
     let fromDate = id.match(/fromDate=(.*)&toDate/)[1];
     let toDate = id.match(/toDate=(.*)&adults/)[1];
     let adults = id.match(/adults=(.*)&children/)[1];
     let children = id.match(/children=(.*)/)[1];
-    console.log(search, fromDate, toDate, adults, children);
 
     let [state, setState] = useState({
-        data: establishments
+        establishments: []
     });
-
-    console.log(state.establishments);
+    
+    console.log("state data", state);
 
     function setLS(event, name) {
         let value = event.target.value;
@@ -35,7 +36,7 @@ export default function Results() {
         let filteredArray = establishments;
         console.log("filteredarray før filter: ", filteredArray);
         filteredArray = filteredArray.filter((i) => {
-            if (i.establishmentName.toLowerCase().indexOf(search)!== -1) {
+            if (i.establishmentName.toLowerCase().indexOf(search.toLowerCase())!== -1) {
                 return i;
             }
         });
@@ -45,6 +46,8 @@ export default function Results() {
 
     useEffect( 
         function() {
+            setState({data: establishments});
+            console.log("state er nå ", state.establishments);
             filterArray();
         },[]
     ); 
@@ -98,7 +101,7 @@ export default function Results() {
             </div>
             <h1>Search results for '{search}'</h1>
             <div className="col-12 results">
-                {/*
+                {
                     state.establishments.map(
                         i => <ResultsArticle
                             establishmentName={i.establishmentName}
@@ -106,7 +109,7 @@ export default function Results() {
                             maxGuests={i.maxGuests}
                         />
                     )
-                */}
+                }
             </div>
         </div>
     )  

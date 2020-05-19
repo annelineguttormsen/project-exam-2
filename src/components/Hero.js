@@ -17,6 +17,7 @@ export default function Hero() {
     function updateInput(event, index) {
         //hent verdien inni input som tilkaller funksjonen
         let value = event.target.value;
+        value = value.replace(/ /g,"_");
 
         //kopier nåværende state objekt
         //finn indexen til input som har tilkalt funksjonen
