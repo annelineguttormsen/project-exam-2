@@ -141,6 +141,15 @@ input[type=radio] {
   font-size: 24px;
   padding: 5px 60px;
 }
+.btn--search {
+  display: inline-block;
+  width: 40px;
+  height: 40px;
+  margin-top: 10px;
+  margin-left: 10px;
+  border-radius: 50%;
+  vertical-align: top;
+}
 
 .App {
   box-sizing: border-box;
@@ -257,17 +266,30 @@ input[type=radio] {
   padding: 5px 7px 5px 0px;
 }
 
+.results__article {
+  margin-bottom: 40px;
+  background: #ECECEC;
+}
 .results__article__image {
-  background: url("https://images.unsplash.com/photo-1439130490301-25e322d88054?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1489&q=80") no-repeat center center;
   background-size: cover;
   height: 200px;
   display: inline-block;
   vertical-align: top;
 }
+.results__article__image img {
+  height: 100%;
+  width: 100%;
+}
 .results__article__desc {
   padding: 0px 10px;
   vertical-align: top;
   display: inline-block;
+}
+.results__article__desc p {
+  margin: 5px 0px;
+}
+.results__article__desc h2 {
+  margin: 0;
 }
 
 .hotelinformation__article__text {

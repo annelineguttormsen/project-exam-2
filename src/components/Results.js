@@ -96,7 +96,10 @@ export default function Results() {
                         min="1"
                         max="10"
                         defaultValue={children}
-                    />
+                    /><button
+                        type="submit"
+                        className="col-2 btn btn--normal btn--search"
+                    ></button>
                 </form>
             </div>
             <h1>Search results for '{search}'</h1>
@@ -107,6 +110,8 @@ export default function Results() {
                             establishmentName={i.establishmentName}
                             price={i.price}
                             maxGuests={i.maxGuests}
+                            img={i.imageUrl}
+                            id={i.id}
                         />
                     )
                 }

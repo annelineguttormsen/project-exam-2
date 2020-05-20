@@ -80,6 +80,15 @@ input[type="radio"] {
             padding:5px 60px;
         }
     }
+    &--search {
+        display:inline-block;
+        width:40px;
+        height:40px;
+        margin-top:10px;
+        margin-left:10px;
+        border-radius:50%;
+        vertical-align:top;
+    }
 }
 .App {
     box-sizing:border-box;
@@ -204,18 +213,30 @@ input[type="radio"] {
 }
 .results {
     &__article {
+        margin-bottom:40px;
+        background:$lightgray;
         &__image {
-            //TODO: FJERN DETTE
-            background:url("https://images.unsplash.com/photo-1439130490301-25e322d88054?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1489&q=80")no-repeat center center;
             background-size:cover;
             height:200px;
             display:inline-block;
             vertical-align:top;
+            img {
+                height:100%;
+                width:100%;
+            }
         }
         &__desc {
             padding:0px 10px;
             vertical-align:top;
             display:inline-block;
+            p {
+                margin:5px 0px;
+            }
+            h2 {
+                margin:0;
+            }
+            
+
         }
     }
 }
