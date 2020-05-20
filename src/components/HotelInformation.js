@@ -1,9 +1,16 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 
 import HotelInformationArticle from "./HotelInformationArticle";
+let establishments = require("./establishments.json");
 
 export default function HotelInformation() {
+    let { id } = useParams();
+    console.log(id);
+
+    let currentArticle = establishments.find(i =>
+        i.id == id);
+    console.log(currentArticle);
     return (
         <div className="col-6 col-md-8 col-sm-12 hotelinformation container">
             <div className="col-12 breadcrumbs">
@@ -13,13 +20,13 @@ export default function HotelInformation() {
                 </ul>
             </div>
             <HotelInformationArticle
-                img="https://images.unsplash.com/photo-1439130490301-25e322d88054?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1489&q=80"
-                title="Sunsssset Beach"
-                desc="Get ready for some amazing sunsets as you sip a cocktail and watch dolphins play in the harbour below."
-                price="85"
-                maxGuests="18"
-                selfCatering={true}
-                email="info@sunsetbeach.com"
+                img={currentArticle.imageUrl}
+                title={currentArticle.establishmentName}
+                desc={currentArticle.description}
+                price={currentArticle.price}
+                maxGuests={currentArticle.maxGuests}
+                selfCatering={currentArticle.selfCatering}
+                email={currentArticle.establishmentEmail}
             />
         </div>
     )

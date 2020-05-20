@@ -292,12 +292,19 @@ input[type=radio] {
   margin: 0;
 }
 
+.hotelinformation__article__image {
+  height: 500px;
+}
 .hotelinformation__article__text {
   padding: 5px 0px;
   line-height: 1.5;
 }
 .hotelinformation__article #map {
   border: none;
+  margin: 10px 0px;
+}
+.hotelinformation__article .btn {
+  text-align: center;
 }
 
 .footer {

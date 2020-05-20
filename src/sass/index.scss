@@ -235,19 +235,24 @@ input[type="radio"] {
             h2 {
                 margin:0;
             }
-            
-
         }
     }
 }
 .hotelinformation {
     &__article {
+        &__image {
+            height:500px;
+        }
         &__text {
             padding:5px 0px;
             line-height:1.5;
         }
         #map {
             border:none;
+            margin:10px 0px;
+        }
+        .btn {
+            text-align:center;
         }
     }
 }
