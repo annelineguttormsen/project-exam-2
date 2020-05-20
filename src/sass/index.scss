@@ -95,8 +95,10 @@ input[type="radio"] {
     width:1360px;
     margin:0 auto;
     overflow:hidden;
+    position:relative;
 }
 .container {
+    position:relative;
     padding:50px;
     margin:0 auto;
 }
@@ -189,11 +191,27 @@ input[type="radio"] {
 }
 .account__menu {
     border-bottom:1px solid $lightgray;
+    background:white;
+    position:relative;
+    //collapsed margins med mindre jeg setter float
+    float:left;
+    z-index:1;
+    &__title {
+        display:inline-block;
+    }
+    &__icon {
+        display:inline-block;
+        vertical-align:center;
+    }
     &__list {
+        display:block;
+        background:$red;
+        position:absolute;
+        width:100%;
         li {
-            display:inline-block;
-            padding-right:7px;
-            padding-bottom:5px;
+            display:block;
+            padding:10px 5px;
+            text-align:right;
             a {
                 text-decoration:none;
                 color:black;

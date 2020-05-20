@@ -156,9 +156,11 @@ input[type=radio] {
   width: 1360px;
   margin: 0 auto;
   overflow: hidden;
+  position: relative;
 }
 
 .container {
+  position: relative;
   padding: 50px;
   margin: 0 auto;
 }
@@ -246,11 +248,28 @@ input[type=radio] {
 
 .account__menu {
   border-bottom: 1px solid #ECECEC;
+  background: white;
+  position: relative;
+  float: left;
+  z-index: 1;
+}
+.account__menu__title {
+  display: inline-block;
+}
+.account__menu__icon {
+  display: inline-block;
+  vertical-align: center;
+}
+.account__menu__list {
+  display: block;
+  background: #F23827;
+  position: absolute;
+  width: 100%;
 }
 .account__menu__list li {
-  display: inline-block;
-  padding-right: 7px;
-  padding-bottom: 5px;
+  display: block;
+  padding: 10px 5px;
+  text-align: right;
 }
 .account__menu__list li a {
   text-decoration: none;

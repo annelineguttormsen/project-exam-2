@@ -3,13 +3,17 @@ import { Link } from "react-router-dom";
 
 export default function AccountMenu(props) {
     return (
+        <>
         <div className="col-12 account__menu">
-            <h1>{props.title}</h1>
-            <ul className="account__menu__list">
-                <li><Link to="/enquiries">Enquiries</Link></li>
-                <li><Link to="/messages">Messages</Link></li>
-                <li><Link to="/addestablishment">Add establishment</Link></li>
-            </ul>
+            <h1 className="account__menu__title">{props.title}</h1>
+            <img className="account__menu__icon" src="#"/>
         </div>
+        <ul className="account__menu__list">
+            <li><Link to="/enquiries">Enquiries</Link></li>
+            <li><Link to="/messages">Messages</Link></li>
+            <li><Link to="/addestablishment">Add establishment</Link></li>
+            <li><Link to="/addestablishment">Log out</Link></li>
+        </ul>
+        </>
     )
 }
