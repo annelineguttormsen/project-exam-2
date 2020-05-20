@@ -15,6 +15,7 @@ import Enquiries from "./components/Enquiries";
 import Messages from "./components/Messages";
 import AddEstablishment from "./components/AddEstablishment";
 import HotelInformation from "./components/HotelInformation";
+import NoMatch from "./components/NoMatch";
 
 //komponenter delt av alle sider
 import Hero from "./components/Hero";
@@ -34,7 +35,8 @@ function App() {
             <Route component={AddEstablishment} path="/addestablishment"/>
             <Route path="/hotelinformation/:id" children={<HotelInformation/>}/>
             <Route path="/results/:id" children={<Results/>}/>
-            {/* <Route component={NoMatch} path="*"/> */}
+            <Route component={NoMatch} path="/404"/>
+            <Route component={NoMatch} path="*"/> 
           </Switch>
         <Footer/>
       </Router>

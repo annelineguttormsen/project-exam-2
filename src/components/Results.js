@@ -7,7 +7,6 @@ import {
 import ResultsArticle from "./ResultsArticle";
 let establishments = require("./establishments.json");
 
-
 export default function Results() {
     console.log("establishments filen", establishments);
 

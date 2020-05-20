@@ -1,11 +1,20 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 export default function HotelInformationArticle(props) {
     const articleBackground = {
         background: "url(" + props.img + ")no-repeat center center",
         backgroundSize: "cover"
     };
+    const currentUrl = "/hotelinformation/" + props.id;
     return (
+        <>
+        <div className="col-12 breadcrumbs">
+            <ul>
+                <li className="breadcrumbs__link"><Link to="/">Home</Link></li><span>></span>
+                <li className="breadcrumbs__link"><Link to={currentUrl}>Hotel information</Link></li>
+            </ul>
+        </div>
         <div className="hotelinformation__article">
             <h1 className="hotelinformation__article__title">{props.title}</h1>
             <div className="hotelinformation__article__image"
@@ -18,5 +27,6 @@ export default function HotelInformationArticle(props) {
             <iframe title="Map" id="map" className="col-12" height="350" scrolling="no" src="https://www.openstreetmap.org/export/embed.html?bbox=5.2155232429504395%2C60.38742995799174%2C5.243847370147706%2C60.397087799856465&amp;layer=mapnik&amp;marker=60.39225923702232%2C5.229685306549072"/>
             <button className="btn btn--success btn--big"><p>Reserve</p></button>
         </div>
+        </>
     )
 }
