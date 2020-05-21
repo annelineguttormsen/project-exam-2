@@ -270,6 +270,7 @@ input[type=radio] {
   z-index: 1;
   border: 1px solid #ECECEC;
   border-top: none;
+  outline: none;
   top: 0;
   bottom: auto;
   visibility: visible;

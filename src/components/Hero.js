@@ -2,11 +2,22 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 
 export default function Hero() {
+    //få tak i dagens dato og gjør om til yyyy-mm-dd
+    let now = new Date();
+    let yyyy = now.getFullYear();
+    let mm = now.getMonth() + 1;
+    if (mm < 10) {
+        mm = "0" + mm.toString();
+        console.log(mm);
+    }
+    let dd = now.getDate();
+    console.log(yyyy, mm, dd);
+
     let [state, setState] = useState({
         data: {
             search: "Sunsssset Beach",
-            fromDate: "2020-05-02",
-            toDate: "2020-05-20",
+            fromDate: yyyy + "-" + mm + "-" + dd,
+            toDate: yyyy + "-" + mm + "-" + dd,
             adults: 2,
             children: 1,
             url: "/results/search=Sunsssset_Beach&fromDate=2020-05-20&toDate=2020-05-20&adults=2&children=1"
@@ -41,12 +52,6 @@ export default function Hero() {
 
         localStorage.setItem(event,index);
     }
-
-    //blir tilkalt hver gang hero rerendres
-    console.log(state);
-
-    //TODO: hent dagen i dag og putt den i date input
-    //må være i YYYY-MM-DD
 
     return (
         <div className="col-12 hero">
