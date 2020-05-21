@@ -250,8 +250,7 @@ input[type=radio] {
   border-bottom: 1px solid #ECECEC;
   background: white;
   position: relative;
-  float: left;
-  z-index: 1;
+  z-index: 2;
 }
 .account__menu__title {
   display: inline-block;
@@ -259,12 +258,24 @@ input[type=radio] {
 .account__menu__icon {
   display: inline-block;
   vertical-align: center;
+  margin: 33px 0px;
+  float: right;
+  cursor: pointer;
 }
 .account__menu__list {
-  display: block;
+  box-sizing: border-box;
   background: #F23827;
   position: absolute;
   width: 100%;
+  z-index: 1;
+  top: 0;
+  bottom: auto;
+  visibility: visible;
+}
+.account__menu__list--hidden {
+  bottom: 0;
+  top: auto;
+  visibility: hidden;
 }
 .account__menu__list li {
   display: block;
@@ -275,6 +286,10 @@ input[type=radio] {
   text-decoration: none;
   color: black;
   font-weight: 500;
+}
+.account__menu__list--wrap {
+  position: relative;
+  display: block;
 }
 
 .enquiries__article {
