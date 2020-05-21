@@ -1,8 +1,10 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import { Link } from "react-router-dom";
 
+import menuIcon from "./../menu_icon.svg";
+
 export default function AccountMenu(props) {
-    let menuRef = React.createRef();
+    const menuRef = useRef();
     
     const [state, setState] = useState({
         active: false
@@ -12,27 +14,35 @@ export default function AccountMenu(props) {
     function toggleClass() {
         const currentState = state.active;
         if (currentState === true) {
-            menuRef.blur();
-            console.log(currentState);
+            //menuRef.current.blur();
+            setTimeout(function(){
+                menuRef.current.blur();
+            });
         } 
-        if (currentState === false) {
-            menuRef.focus();
-            console.log(currentState);
+        else if (currentState === false) {
+            //menuRef.current.focus();
+            setTimeout(function(){
+                menuRef.current.focus();
+            });
         }
         setState({active: !currentState});
-        console.log(menuRef);
     }
 
     return (
         <>
         <div className="col-12 account__menu">
             <h1 className="account__menu__title">{props.title}</h1>
-            <img className="account__menu__icon" onClick={toggleClass} src="#" alt="Menu"/>
+            <img 
+                className="account__menu__icon" 
+                onMouseDown={state.active ? console.log("hei") : toggleClass}
+                src={menuIcon} 
+                alt="Menu"
+            />
         </div>
         <div className="col-12 account__menu__list--wrap">
             <ul 
                 className={state.active ? "account__menu__list": "account__menu__list account__menu__list--hidden"}
-                ref={(referance) => menuRef = referance}
+                ref={menuRef}
                 onBlur={toggleClass}
                 tabIndex="1"
             >

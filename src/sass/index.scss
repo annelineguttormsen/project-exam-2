@@ -194,14 +194,14 @@ input[type="radio"] {
     background:white;
     position:relative;
     z-index:2;
+    display:flex;
+    justify-content:space-between;
     &__title {
         display:inline-block;
     }
     &__icon {
         display:inline-block;
-        vertical-align:center;
-        margin:33px 0px;
-        float:right;
+        width:30px;
         cursor:pointer;
     }
     &__list {
@@ -216,9 +216,6 @@ input[type="radio"] {
         top:0;
         bottom:auto;
         visibility:visible;
-        &:focus {
-            background:$red;
-        }
         &--hidden {
             bottom:0;
             top:auto;
@@ -226,10 +223,8 @@ input[type="radio"] {
         }
         li {
             display:block;
-            padding:15px 5px;
+            padding:15px 10px;
             text-align:right;
-            border-top:1px solid $lightgray;
-
             a {
                 text-decoration:none;
                 color:black;
