@@ -264,13 +264,18 @@ input[type=radio] {
 }
 .account__menu__list {
   box-sizing: border-box;
-  background: #F23827;
+  background: white;
   position: absolute;
   width: 100%;
   z-index: 1;
+  border: 1px solid #ECECEC;
+  border-top: none;
   top: 0;
   bottom: auto;
   visibility: visible;
+}
+.account__menu__list:focus {
+  background: #F23827;
 }
 .account__menu__list--hidden {
   bottom: 0;
@@ -279,8 +284,9 @@ input[type=radio] {
 }
 .account__menu__list li {
   display: block;
-  padding: 10px 5px;
+  padding: 15px 5px;
   text-align: right;
+  border-top: 1px solid #ECECEC;
 }
 .account__menu__list li a {
   text-decoration: none;

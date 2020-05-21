@@ -206,14 +206,19 @@ input[type="radio"] {
     }
     &__list {
         box-sizing:border-box;
-        background:$red;
+        background:white;
         position:absolute;
         width:100%;
         z-index:1;
+        border:1px solid $lightgray;
+        border-top:none;
         //styles for å være visible
         top:0;
         bottom:auto;
         visibility:visible;
+        &:focus {
+            background:$red;
+        }
         &--hidden {
             bottom:0;
             top:auto;
@@ -221,8 +226,10 @@ input[type="radio"] {
         }
         li {
             display:block;
-            padding:10px 5px;
+            padding:15px 5px;
             text-align:right;
+            border-top:1px solid $lightgray;
+
             a {
                 text-decoration:none;
                 color:black;
