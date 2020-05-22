@@ -143,12 +143,18 @@ input[type=radio] {
 }
 .btn--search {
   display: inline-block;
-  width: 40px;
-  height: 40px;
   margin-top: 10px;
   margin-left: 10px;
+  width: 40px;
+  height: 40px;
   border-radius: 50%;
   vertical-align: top;
+}
+.btn--search a {
+  padding: 0;
+}
+.btn--search img {
+  width: 25px;
 }
 
 .App {

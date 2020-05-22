@@ -11,7 +11,6 @@ export default function Hero() {
         console.log(mm);
     }
     let dd = now.getDate();
-    console.log(yyyy, mm, dd);
 
     let [state, setState] = useState({
         data: {
@@ -45,8 +44,6 @@ export default function Hero() {
             + "&adults=" + data["adults"]
             + "&children=" + data["children"]);
         
-        console.log("kopi av state er ", data);
-
         //oppdater state deretter state
         setState({data: data});
 

@@ -5,11 +5,10 @@ import {
 } from "react-router-dom";
 
 import ResultsArticle from "./ResultsArticle";
+import searchIcon from "./../search.svg";
 let establishments = require("./establishments.json");
 
 export default function Results() {
-    console.log("establishments filen", establishments);
-
     let { id } = useParams();
 
     let search = id.match(/search=(.*)&fromDate/)[1];
@@ -19,17 +18,24 @@ export default function Results() {
     let toDate = id.match(/toDate=(.*)&adults/)[1];
     let adults = id.match(/adults=(.*)&children/)[1];
     let children = id.match(/children=(.*)/)[1];
+    let url = "/results/" + id;
 
     let [state, setState] = useState({
-        establishments: []
+        establishmentData: []
+    });
+    let [urlState, urlSetState] = useState({
+        data: {
+            search,
+            fromDate,
+            toDate,
+            adults,
+            children,
+            url
+        }
     });
     
     console.log("state data", state);
-
-    function setLS(event, name) {
-        let value = event.target.value;
-        localStorage.setItem(name,value);
-    }
+    console.log("url data", urlState);
 
     function filterArray() {
         let filteredArray = establishments;
@@ -40,13 +46,32 @@ export default function Results() {
             }
         });
         console.log("filtered array etter: ", filteredArray);
-        setState({establishments: filteredArray});
+        setState({establishmentData: filteredArray});
+    }
+
+    function updateInput(event, index) {
+        let value = event.target.value;
+        value = value.replace(/ /g,"_");
+
+        //https://stackoverflow.com/a/49502115
+        let data = urlState.data;
+        data[index] = value;
+
+        data["url"] = ("/results/search=" + data["search"]
+            + "&fromDate=" + data["fromDate"]
+            + "&toDate=" + data["toDate"]
+            + "&adults=" + data["adults"]
+            + "&children=" + data["children"]);
+        
+        urlSetState({data: data});
+
+        localStorage.setItem(event,index);
     }
 
     useEffect( 
         function() {
-            setState({data: establishments});
-            console.log("state er nå ", state.establishments);
+            setState({establishmentData: establishments});
+            setState({data: "ay"});
             filterArray();
         },[]
     ); 
@@ -66,19 +91,19 @@ export default function Results() {
                         type="text" 
                         placeholder="Hotel" 
                         defaultValue={search}
-                        onChange={(event) => setLS(event, "search")}
+                        onChange={(event) => updateInput(event, "search")}
                     />
                     <input 
                         className="col-6 small__search__form__input" 
                         type="date" 
                         defaultValue={fromDate}
-                        onChange={(event) => setLS(event, "fromDate")}
+                        onChange={(event) => updateInput(event, "fromDate")}
                     />
                     <input 
                         className="col-6 small__search__form__input" 
                         type="date" 
                         defaultValue={toDate}
-                        onChange={(event) => setLS(event, "toDate")}
+                        onChange={(event) => updateInput(event, "toDate")}
                     />
                     <input 
                         className="col-5 small__search__form__select" 
@@ -87,6 +112,7 @@ export default function Results() {
                         min="1"
                         max="10"
                         defaultValue={adults}
+                        onChange={(event) => updateInput(event, "adults")}
                     />
                     <input 
                         className="col-5 small__search__form__select" 
@@ -95,16 +121,21 @@ export default function Results() {
                         min="1"
                         max="10"
                         defaultValue={children}
+                        onChange={(event) => updateInput(event, "children")}
                     /><button
                         type="submit"
-                        className="col-2 btn btn--normal btn--search"
-                    ></button>
+                        className="btn btn--normal btn--search"
+                    >
+                        <Link to={urlState.data["url"]}>
+                            <img src={searchIcon}/>
+                        </Link>
+                    </button>
                 </form>
             </div>
             <h1>Search results for '{search}'</h1>
             <div className="col-12 results">
                 {
-                    state.establishments.map(
+                    state.establishmentData.map(
                         i => <ResultsArticle
                             establishmentName={i.establishmentName}
                             price={i.price}
