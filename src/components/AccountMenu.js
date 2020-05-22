@@ -14,13 +14,11 @@ export default function AccountMenu(props) {
     function toggleClass() {
         const currentState = state.active;
         if (currentState === true) {
-            //menuRef.current.blur();
             setTimeout(function(){
                 menuRef.current.blur();
             });
         } 
         else if (currentState === false) {
-            //menuRef.current.focus();
             setTimeout(function(){
                 menuRef.current.focus();
             });
