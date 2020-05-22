@@ -13,11 +13,14 @@ import searchIcon from "./../search.svg";
 let establishments = require("./establishments.json");
 
 export default function Results() {
+    //hent parametre fra url og history fra react router dom 
     let { id } = useParams();
     const history = useHistory();
 
+    //globale variabler for params fra urlen
     let search, fromDate, toDate, adults, children, url;
 
+    //hvis ingen av disse matcher så redirectes siden til 404
     try {
         search = id.match(/search=(.*)&fromDate/)[1];
         //bytt _ til mellomrom
@@ -47,6 +50,8 @@ export default function Results() {
     
     console.log("state data", state, urlState);
 
+    //filtrer array basert på search i state.data
+    //deretter oppdater establishmentdata som oppdaterer resultsarticles
     function filterArray() {
         let filteredArray = establishments;
         filteredArray = filteredArray.filter((i) => {
@@ -57,6 +62,7 @@ export default function Results() {
         setState({establishmentData: filteredArray});
     }
 
+    //samme som på hero komponentet
     function updateInput(event, index) {
         let value = event.target.value;
         value = value.replace(/ /g,"_");
@@ -78,7 +84,8 @@ export default function Results() {
     useEffect( 
         function() {
             setState({establishmentData: establishments});
-            setState({data: "ay"});
+            setState({data: ""});
+            //hvis search er tom || undefined så redirect til 404
             try {
                 filterArray();
             } catch {
@@ -87,11 +94,12 @@ export default function Results() {
         },[]
     );
 
+    //gå gjennom alle params for å sjekke om noen er tomme eller undefined
+    //ved error redirect til 404
     let paramsArray = [search,fromDate,toDate,adults,children,url];
     let checkParams = paramsArray.find(i => 
         i === undefined || i === ""
     );
-    console.log(checkParams);
 
     if (checkParams !== undefined) {
         history.replace("/404");
