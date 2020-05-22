@@ -1,9 +1,12 @@
-import React, { useState, useEffect } from "react";
+import React, {
+    useState, 
+    useEffect 
+} from "react";
 import { 
     Link,
-    useParams
+    useParams,
+    useHistory
 } from "react-router-dom";
-import { useForm } from "react-hook-form";
 
 import ResultsArticle from "./ResultsArticle";
 import searchIcon from "./../search.svg";
@@ -11,15 +14,22 @@ let establishments = require("./establishments.json");
 
 export default function Results() {
     let { id } = useParams();
+    const history = useHistory();
 
-    let search = id.match(/search=(.*)&fromDate/)[1];
-    //bytt _ til mellomrom
-    search = search.replace(/_/g, " ");
-    let fromDate = id.match(/fromDate=(.*)&toDate/)[1];
-    let toDate = id.match(/toDate=(.*)&adults/)[1];
-    let adults = id.match(/adults=(.*)&children/)[1];
-    let children = id.match(/children=(.*)/)[1];
-    let url = "/results/" + id;
+    let search, fromDate, toDate, adults, children, url;
+
+    try {
+        search = id.match(/search=(.*)&fromDate/)[1];
+        //bytt _ til mellomrom
+        search = search.replace(/_/g, " ");
+        fromDate = id.match(/fromDate=(.*)&toDate/)[1];
+        toDate = id.match(/toDate=(.*)&adults/)[1];
+        adults = id.match(/adults=(.*)&children/)[1];
+        children = id.match(/children=(.*)/)[1];
+        url = "/results/" + id;
+    } catch(err) {
+        history.replace("/404");
+    }
 
     let [state, setState] = useState({
         establishmentData: []
@@ -62,7 +72,6 @@ export default function Results() {
             + "&children=" + data["children"]);
         
         urlSetState({data: data});
-
         localStorage.setItem(event,index);
     }
 
@@ -70,84 +79,102 @@ export default function Results() {
         function() {
             setState({establishmentData: establishments});
             setState({data: "ay"});
-            filterArray();
+            try {
+                filterArray();
+            } catch {
+                history.replace("/404");
+            }
         },[]
-    ); 
+    );
 
-    return (
-        <div className="col-6 col-md-8 col-sm-12 container">
-            <div className="col-12 breadcrumbs">
-                <ul>
-                    <li className="breadcrumbs__link"><Link to="/">Home</Link></li><span>></span>
-                    <li className="breadcrumbs__link"><Link to="/results">Search results</Link></li>
-                </ul>
-            </div>
-            <div className="col-12 small__search">
-                <form 
-                    className="col-12 small__search__form"
-                    onSubmit ={filterArray}
-                >
-                    <input 
-                        className="col-12 small__search__form__input"  
-                        type="text" 
-                        placeholder="Hotel" 
-                        defaultValue={search}
-                        onChange={(event) => updateInput(event, "search")}
-                    />
-                    <input 
-                        className="col-6 small__search__form__input" 
-                        type="date" 
-                        defaultValue={fromDate}
-                        onChange={(event) => updateInput(event, "fromDate")}
-                    />
-                    <input 
-                        className="col-6 small__search__form__input" 
-                        type="date" 
-                        defaultValue={toDate}
-                        onChange={(event) => updateInput(event, "toDate")}
-                    />
-                    <input 
-                        className="col-5 small__search__form__select" 
-                        type="number"
-                        name="Adults"
-                        min="1"
-                        max="10"
-                        defaultValue={adults}
-                        onChange={(event) => updateInput(event, "adults")}
-                    />
-                    <input 
-                        className="col-5 small__search__form__select" 
-                        type="number"
-                        name="Children"
-                        min="1"
-                        max="10"
-                        defaultValue={children}
-                        onChange={(event) => updateInput(event, "children")}
-                    /><button
-                        type="submit"
-                        className="btn btn--normal btn--search"
-                        onClick={filterArray}
+    let paramsArray = [search,fromDate,toDate,adults,children,url];
+    let checkParams = paramsArray.find(i => 
+        i === undefined || i === ""
+    );
+    console.log(checkParams);
+
+    if (checkParams !== undefined) {
+        history.replace("/404");
+        return null
+    } else {
+        return (
+            <div className="col-6 col-md-8 col-sm-12 container">
+                <div className="col-12 breadcrumbs">
+                    <ul>
+                        <li className="breadcrumbs__link"><Link to="/">Home</Link></li><span>></span>
+                        <li className="breadcrumbs__link"><Link to="/results">Search results</Link></li>
+                    </ul>
+                </div>
+                <div className="col-12 small__search">
+                    <form 
+                        className="col-12 small__search__form"
+                        onSubmit ={filterArray}
                     >
-                        <Link to={urlState.data["url"]}>
-                            <img src={searchIcon}/>
-                        </Link>
-                    </button>
-                </form>
-            </div>
-            <h1>Search results for '{search}'</h1>
-            <div className="col-12 results">
-                {
-                    state.establishmentData.map(
-                        i => <ResultsArticle
-                            establishmentName={i.establishmentName}
-                            price={i.price}
-                            maxGuests={i.maxGuests}
-                            img={i.imageUrl}
-                            id={i.id}
+                        <input 
+                            className="col-12 small__search__form__input"  
+                            type="text" 
+                            placeholder="Hotel" 
+                            defaultValue={search}
+                            onChange={(event) => updateInput(event, "search")}
                         />
-                    )
-                }
+                        <input 
+                            className="col-6 small__search__form__input" 
+                            type="date" 
+                            defaultValue={fromDate}
+                            onChange={(event) => updateInput(event, "fromDate")}
+                        />
+                        <input 
+                            className="col-6 small__search__form__input" 
+                            type="date" 
+                            defaultValue={toDate}
+                            onChange={(event) => updateInput(event, "toDate")}
+                        />
+                        <input 
+                            className="col-5 small__search__form__select" 
+                            type="number"
+                            name="Adults"
+                            min="1"
+                            max="10"
+                            defaultValue={adults}
+                            onChange={(event) => updateInput(event, "adults")}
+                        />
+                        <input 
+                            className="col-5 small__search__form__select" 
+                            type="number"
+                            name="Children"
+                            min="1"
+                            max="10"
+                            defaultValue={children}
+                            onChange={(event) => updateInput(event, "children")}
+                        /><button
+                            type="submit"
+                            className="btn btn--normal btn--search"
+                            onClick={filterArray}
+                        >
+                            <Link to={urlState.data["url"]}>
+                                <img 
+                                    src={searchIcon}
+                                    alt="Search icon"
+                                />
+                            </Link>
+                        </button>
+                    </form>
+                </div>
+                <h1>Search results for '{search}'</h1>
+                <div className="col-12 results">
+                    {
+                        state.establishmentData.map(
+                            i => <ResultsArticle
+                                establishmentName={i.establishmentName}
+                                price={i.price}
+                                maxGuests={i.maxGuests}
+                                img={i.imageUrl}
+                                id={i.id}
+                            />
+                        )
+                    }
+                </div>
             </div>
-        </div>
-    )  
+        ) 
+    }
 }

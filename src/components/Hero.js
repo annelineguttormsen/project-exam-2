@@ -8,7 +8,6 @@ export default function Hero() {
     let mm = now.getMonth() + 1;
     if (mm < 10) {
         mm = "0" + mm.toString();
-        console.log(mm);
     }
     let dd = now.getDate();
 

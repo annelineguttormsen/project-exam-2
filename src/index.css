@@ -350,6 +350,14 @@ input[type=radio] {
   text-align: center;
 }
 
+.nomatch__title, .nomatch__text {
+  text-align: center;
+  line-height: 1.5;
+}
+.nomatch__title {
+  background: #FFBE0D;
+}
+
 .footer {
   background: #ECECEC;
 }
