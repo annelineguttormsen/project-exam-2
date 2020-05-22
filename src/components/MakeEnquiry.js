@@ -1,12 +1,15 @@
 import React, { useState } from "react";
 import { 
     Link,
-    useParams
+    useParams,
+    useHistory
 } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
 
 import ErrorMessage from "./ErrorMessage";
+
+let establishments = require("./establishments.json");
 
 const schema = yup.object().shape({
 	clientName: yup.string().required("Name is required"),
@@ -15,7 +18,7 @@ const schema = yup.object().shape({
 
 export default function MakeEnquiry() {
     let { id } = useParams();
-    console.log(id);
+    const history = useHistory();
 
     const { register, handleSubmit, errors } = useForm({
         validationSchema: schema
@@ -25,18 +28,15 @@ export default function MakeEnquiry() {
         data: []
     });
 
-    // try {
-    //     search = id.match(/search=(.*)&fromDate/)[1];
-    //     //bytt _ til mellomrom
-    //     search = search.replace(/_/g, " ");
-    //     fromDate = id.match(/fromDate=(.*)&toDate/)[1];
-    //     toDate = id.match(/toDate=(.*)&adults/)[1];
-    //     adults = id.match(/adults=(.*)&children/)[1];
-    //     children = id.match(/children=(.*)/)[1];
-    //     url = "/results/" + id;
-    // } catch(err) {
-    //     history.replace("/404");
-    // }
+    let hotelId, fromDate, toDate;
+
+    try {
+        hotelId = id.match(/id=(.*)&fromDate/)[1];
+        fromDate = id.match(/fromDate=(.*)&toDate/)[1];
+        toDate = id.match(/toDate=(.*)/)[1];
+    } catch(err) {
+        history.replace("/404");
+    }
 
     function onSubmit(data) {
         console.log(data);
@@ -61,21 +61,21 @@ export default function MakeEnquiry() {
                     className="col-12 makeenquiry__input makeenquiry__input--disabled" 
                     name="establishment"
                     type="text"
-                    value="sunset beach"
+                    value={hotelId}
                 /></label>
                 <label>Check-in
                 <input
                     className="col-12 makeenquiry__input" 
                     name="checkin"
                     type="date"
-                    //defaultValue={fromDate}
+                    value={fromDate}
                 /></label>
                 <label>Check-out
                 <input
                     className="col-12 makeenquiry__input" 
                     name="checkout"
                     type="date"
-                    // defaultValue={toDate}
+                    value={toDate}
                 /></label>
                 <h2>Contact information</h2>
                 <label>Full name <span>* </span>{errors.clientName && <ErrorMessage text={errors.clientName.message}/>}
