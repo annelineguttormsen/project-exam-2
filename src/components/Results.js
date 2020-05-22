@@ -18,7 +18,7 @@ export default function Results() {
     const history = useHistory();
 
     //globale variabler for params fra urlen
-    let search, fromDate, toDate, adults, children, url;
+    let search, fromDate, toDate, adults, children, url, cleanedUrl;
 
     //hvis ingen av disse matcher så redirectes siden til 404
     try {
@@ -30,6 +30,8 @@ export default function Results() {
         adults = id.match(/adults=(.*)&children/)[1];
         children = id.match(/children=(.*)/)[1];
         url = "/results/" + id;
+        cleanedUrl = id.match(/&(.*)&adults/)[1];
+        cleanedUrl = "&" + cleanedUrl;
     } catch(err) {
         history.replace("/404");
     }
@@ -44,7 +46,8 @@ export default function Results() {
             toDate,
             adults,
             children,
-            url
+            url,
+            cleanedUrl
         }
     });
     
@@ -76,11 +79,15 @@ export default function Results() {
             + "&toDate=" + data["toDate"]
             + "&adults=" + data["adults"]
             + "&children=" + data["children"]);
+        //cleaned url for results article, trenger ikke adults eller
+        data["cleanedUrl"] = ("&fromDate=" + data["fromDate"]
+            + "&toDate=" + data["toDate"]);
         
         urlSetState({data: data});
         localStorage.setItem(event,index);
     }
 
+    console.log("cleaned url nå", urlState.data["cleanedUrl"]);
     useEffect( 
         function() {
             setState({establishmentData: establishments});
@@ -154,7 +161,8 @@ export default function Results() {
                             max="10"
                             defaultValue={children}
                             onChange={(event) => updateInput(event, "children")}
-                        /><button
+                        />
+                        <button
                             type="submit"
                             className="btn btn--normal btn--search"
                             onClick={filterArray}
@@ -177,6 +185,7 @@ export default function Results() {
                                 price={i.price}
                                 maxGuests={i.maxGuests}
                                 img={i.imageUrl}
+                                url={urlState.data["cleanedUrl"]}
                                 id={i.id}
                             />
                         )

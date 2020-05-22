@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { 
     Link,
     useParams
@@ -19,6 +19,10 @@ export default function MakeEnquiry() {
 
     const { register, handleSubmit, errors } = useForm({
         validationSchema: schema
+    });
+
+    let [state, setState] = useState({
+        data: []
     });
 
     // try {
@@ -48,11 +52,13 @@ export default function MakeEnquiry() {
             </div>
             <h1>Your booking</h1>
             <form
+                method="POST" 
+                action="enquiry-success.php"
                 onSubmit={handleSubmit(onSubmit)}
             >
                 <label>Establishment
                 <input
-                    className="col-12 makeenquiry__input" 
+                    className="col-12 makeenquiry__input makeenquiry__input--disabled" 
                     name="establishment"
                     type="text"
                     value="sunset beach"
@@ -62,12 +68,14 @@ export default function MakeEnquiry() {
                     className="col-12 makeenquiry__input" 
                     name="checkin"
                     type="date"
+                    //defaultValue={fromDate}
                 /></label>
                 <label>Check-out
                 <input
                     className="col-12 makeenquiry__input" 
                     name="checkout"
                     type="date"
+                    // defaultValue={toDate}
                 /></label>
                 <h2>Contact information</h2>
                 <label>Full name <span>* </span>{errors.clientName && <ErrorMessage text={errors.clientName.message}/>}

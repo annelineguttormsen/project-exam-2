@@ -309,6 +309,12 @@ input[type=radio] {
   padding: 5px 7px 5px 0px;
 }
 
+.makeenquiry__input--disabled {
+  background: white;
+  border: 1px solid #ECECEC;
+  color: #AFAFAF;
+}
+
 .results__article {
   margin-bottom: 40px;
   background: #ECECEC;

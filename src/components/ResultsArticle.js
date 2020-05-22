@@ -7,7 +7,7 @@ export default function ResultsArticle(props) {
         backgroundSize: "cover"
     };
 
-    const currentUrl = "/hotelinformation/" + props.id;
+    const articleUrl = "/hotelinformation/id=" + props.id + props.url;
 
     return (
         <div className="col-12 results__article">
@@ -19,7 +19,7 @@ export default function ResultsArticle(props) {
                 <p>Price: ${props.price}</p>
                 <p>Max number of guests: {props.maxGuests}</p>
                 <button className="btn btn--success">
-                    <Link to={currentUrl}>See offer</Link>
+                    <Link to={articleUrl}>See offer</Link>
                 </button>
             </div>
         </div>

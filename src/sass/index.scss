@@ -253,6 +253,15 @@ input[type="radio"] {
         }
     }
 }
+.makeenquiry {
+    &__input {
+        &--disabled {
+            background:white;
+            border:1px solid $lightgray;
+            color:$gray;
+        }
+    }
+}
 .results {
     &__article {
         margin-bottom:40px;

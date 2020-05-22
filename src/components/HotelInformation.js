@@ -12,8 +12,10 @@ export default function HotelInformation() {
 
     const history = useHistory();
 
+    let hotelId = id.match(/id=(.*)&fromDate/)[1];
+
     let currentArticle = establishments.find(i =>
-        i.id === id);
+        i.id === hotelId);
 
     if (currentArticle === undefined) {
         history.replace("/404");
@@ -29,6 +31,7 @@ export default function HotelInformation() {
                     maxGuests={currentArticle.maxGuests}
                     selfCatering={currentArticle.selfCatering}
                     email={currentArticle.establishmentEmail}
+                    // TODO: legg til koordinater
                     id={currentArticle.id}
                 />
             </div>
