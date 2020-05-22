@@ -3,6 +3,7 @@ import {
     Link,
     useParams
 } from "react-router-dom";
+import { useForm } from "react-hook-form";
 
 import ResultsArticle from "./ResultsArticle";
 import searchIcon from "./../search.svg";
@@ -34,18 +35,15 @@ export default function Results() {
         }
     });
     
-    console.log("state data", state);
-    console.log("url data", urlState);
+    console.log("state data", state, urlState);
 
     function filterArray() {
         let filteredArray = establishments;
-        console.log("filteredarray før filter: ", filteredArray);
         filteredArray = filteredArray.filter((i) => {
-            if (i.establishmentName.toLowerCase().indexOf(search.toLowerCase())!== -1) {
+            if (i.establishmentName.toLowerCase().indexOf(urlState.data["search"].toLowerCase())!== -1) {
                 return i;
             }
         });
-        console.log("filtered array etter: ", filteredArray);
         setState({establishmentData: filteredArray});
     }
 
@@ -85,7 +83,10 @@ export default function Results() {
                 </ul>
             </div>
             <div className="col-12 small__search">
-                <form className="col-12 small__search__form">
+                <form 
+                    className="col-12 small__search__form"
+                    onSubmit ={filterArray}
+                >
                     <input 
                         className="col-12 small__search__form__input"  
                         type="text" 
@@ -125,6 +126,7 @@ export default function Results() {
                     /><button
                         type="submit"
                         className="btn btn--normal btn--search"
+                        onClick={filterArray}
                     >
                         <Link to={urlState.data["url"]}>
                             <img src={searchIcon}/>
