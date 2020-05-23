@@ -47,7 +47,6 @@ export default function MakeEnquiry() {
             .catch(function(err) {
                 console.log("noe gikk galt", err);
             });
-            currentArticle = response.find(i => i.id == hotelId);
         }, []
     );
 
