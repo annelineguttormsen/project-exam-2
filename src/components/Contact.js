@@ -32,7 +32,7 @@ export default function Contact() {
                 <form 
                     method="POST" 
                     action="contact-success.php"
-                    onSubmit={handleSubmit(onSubmit)}
+                    // onSubmit={handleSubmit(onSubmit)}
                     className="contact__form"
                 >
                     <label>Full name <span>* </span>{errors.clientName && <ErrorMessage text={errors.clientName.message}/>}
