@@ -42,12 +42,12 @@ export default function MakeEnquiry() {
             fetch("/establishments.json")
             .then((response) => {
                response = response.json();
-               currentArticle = response.find(i => i.id == hotelId);
                console.log(response);
             })
             .catch(function(err) {
                 console.log("noe gikk galt", err);
-            })
+            });
+            currentArticle = response.find(i => i.id == hotelId);
         }, []
     );
 
