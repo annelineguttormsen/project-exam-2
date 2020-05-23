@@ -28,11 +28,11 @@ export default function Enquiries() {
             <div className="enquiries">
                 {enquiries.map(index => 
                     <EnquiriesArticle
-                    property={index["establishment"]}
-                    client={index["clientName"]}
-                    email={index["email"]}
-                    checkin={index["checkin"]}
-                    checkout={index["checkout"]}
+                        property={index["establishment"]}
+                        client={index["clientName"]}
+                        email={index["email"]}
+                        checkin={index["checkin"]}
+                        checkout={index["checkout"]}
                     />)
                 }
             </div>

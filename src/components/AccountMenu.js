@@ -23,6 +23,8 @@ export default function AccountMenu(props) {
                 menuRef.current.focus();
             });
         }
+        //vent litt før state endres så meny ikke forsvinner
+        //med en gang bruker trykker på en link og onblur trigges
         setTimeout(() => {
             setState({active: !currentState});
         },10);

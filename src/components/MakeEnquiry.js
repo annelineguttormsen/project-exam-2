@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { 
     Link,
     useParams,
@@ -8,8 +8,6 @@ import { useForm } from "react-hook-form";
 import * as yup from "yup";
 
 import ErrorMessage from "./ErrorMessage";
-
-let establishments = require("./establishments.json");
 
 const schema = yup.object().shape({
 	clientName: yup.string().required("Name is required"),
@@ -22,11 +20,12 @@ export default function MakeEnquiry() {
     let { id } = useParams();
     const history = useHistory();
 
+    //globale variabler
+    let hotelId, fromDate, toDate, establishments, currentArticle;
+
     const { register, handleSubmit, errors } = useForm({
         validationSchema: schema
     });
-
-    let hotelId, fromDate, toDate;
 
     try {
         hotelId = id.match(/id=(.*)&fromDate/)[1];
@@ -36,8 +35,23 @@ export default function MakeEnquiry() {
         history.replace("/404");
     }
 
-    let currentArticle = establishments.find(i =>
-        i.id === hotelId);
+    currentArticle = hotelId;
+
+    useEffect(
+        function() {
+            fetch("/establishments.json")
+            .then((response) => {
+               response = response.json();
+               console.log(response);
+            })
+            // .then(response => {
+            //     currentArticle = response.find(i => i.id == hotelId)
+            // })
+            .catch(function() {
+                console.log("noe gikk galt");
+            })
+        }, []
+    );
 
     function onSubmit(data, event) {
         //TODO: fjern preventdefault
