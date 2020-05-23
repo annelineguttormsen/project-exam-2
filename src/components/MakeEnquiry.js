@@ -1,4 +1,7 @@
-import React, { useEffect } from "react";
+import React, {
+    useEffect,
+    useState
+} from "react";
 import { 
     Link,
     useParams,
@@ -20,8 +23,12 @@ export default function MakeEnquiry() {
     let { id } = useParams();
     const history = useHistory();
 
+    const [state, setState] = useState({
+        ca: []
+    });
+
     //globale variabler
-    let hotelId, fromDate, toDate, establishments, currentArticle;
+    let hotelId, fromDate, toDate;
 
     const { register, handleSubmit, errors } = useForm({
         validationSchema: schema
@@ -35,15 +42,14 @@ export default function MakeEnquiry() {
         history.replace("/404");
     }
 
-    currentArticle = hotelId;
-
     useEffect(
         function() {
             fetch("/establishments.json")
             .then(response => response.json())
             .then(responseJSON => {
                 console.log("response json er", responseJSON);
-                establishments = responseJSON;
+                let currentArticle = responseJSON.find(i => i.id === hotelId);
+                setState({ca: currentArticle});
             })
             .catch(function(err) {
                 console.log("noe gikk galt", err);
@@ -76,7 +82,7 @@ export default function MakeEnquiry() {
                     className="col-12 makeenquiry__input makeenquiry__input--disabled" 
                     name="establishment"
                     type="text"
-                    value={currentArticle.establishmentName}
+                    value={state.ca["establishmentName"]}
                 /></label>
                 <label>Check-in <span>* </span>{errors.fromDate && <ErrorMessage text={errors.fromDate.message}/>}
                 <input
