@@ -23,9 +23,10 @@ h3 {
 ul {
     list-style-type:none;
 }
-p, label {
+p, b, label {
     font-size:16px;
     font-family:'Karla';
+    line-height:1.5;
     span {
         color:$red;
         font-weight:700;
@@ -195,6 +196,33 @@ input[type="radio"] {
         display:block;
     }
 }
+.results {
+    &__article {
+        margin-bottom:40px;
+        background:$lightgray;
+        &__image {
+            background-size:cover;
+            height:200px;
+            display:inline-block;
+            vertical-align:top;
+            img {
+                height:100%;
+                width:100%;
+            }
+        }
+        &__desc {
+            padding:0px 10px;
+            vertical-align:top;
+            display:inline-block;
+            p {
+                margin:5px 0px;
+            }
+            h2 {
+                margin:0;
+            }
+        }
+    }
+}
 .account__menu {
     border-bottom:1px solid $lightgray;
     background:white;
@@ -262,30 +290,13 @@ input[type="radio"] {
         }
     }
 }
-.results {
+.messages {
     &__article {
-        margin-bottom:40px;
-        background:$lightgray;
-        &__image {
-            background-size:cover;
-            height:200px;
-            display:inline-block;
-            vertical-align:top;
-            img {
-                height:100%;
-                width:100%;
-            }
-        }
-        &__desc {
-            padding:0px 10px;
-            vertical-align:top;
-            display:inline-block;
-            p {
-                margin:5px 0px;
-            }
-            h2 {
-                margin:0;
-            }
+        border:1px solid $lightgray;
+        border-top:none;
+        padding:7px;
+        p,b {
+            padding:5px 0px;
         }
     }
 }
@@ -296,7 +307,6 @@ input[type="radio"] {
         }
         &__text {
             padding:5px 0px;
-            line-height:1.5;
         }
         #map {
             border:none;
@@ -310,7 +320,6 @@ input[type="radio"] {
 .nomatch {
     &__title, &__text {
         text-align:center;
-        line-height:1.5;
     }
     &__title {
         background:$yellow;

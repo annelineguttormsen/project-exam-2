@@ -78,11 +78,12 @@ ul {
   list-style-type: none;
 }
 
-p, label {
+p, b, label {
   font-size: 16px;
   font-family: "Karla";
+  line-height: 1.5;
 }
-p span, label span {
+p span, b span, label span {
   color: #F23827;
   font-weight: 700;
 }
@@ -252,6 +253,32 @@ input[type=radio] {
   display: block;
 }
 
+.results__article {
+  margin-bottom: 40px;
+  background: #ECECEC;
+}
+.results__article__image {
+  background-size: cover;
+  height: 200px;
+  display: inline-block;
+  vertical-align: top;
+}
+.results__article__image img {
+  height: 100%;
+  width: 100%;
+}
+.results__article__desc {
+  padding: 0px 10px;
+  vertical-align: top;
+  display: inline-block;
+}
+.results__article__desc p {
+  margin: 5px 0px;
+}
+.results__article__desc h2 {
+  margin: 0;
+}
+
 .account__menu {
   border-bottom: 1px solid #ECECEC;
   background: white;
@@ -315,30 +342,13 @@ input[type=radio] {
   color: #AFAFAF;
 }
 
-.results__article {
-  margin-bottom: 40px;
-  background: #ECECEC;
+.messages__article {
+  border: 1px solid #ECECEC;
+  border-top: none;
+  padding: 7px;
 }
-.results__article__image {
-  background-size: cover;
-  height: 200px;
-  display: inline-block;
-  vertical-align: top;
-}
-.results__article__image img {
-  height: 100%;
-  width: 100%;
-}
-.results__article__desc {
-  padding: 0px 10px;
-  vertical-align: top;
-  display: inline-block;
-}
-.results__article__desc p {
-  margin: 5px 0px;
-}
-.results__article__desc h2 {
-  margin: 0;
+.messages__article p, .messages__article b {
+  padding: 5px 0px;
 }
 
 .hotelinformation__article__image {
@@ -346,7 +356,6 @@ input[type=radio] {
 }
 .hotelinformation__article__text {
   padding: 5px 0px;
-  line-height: 1.5;
 }
 .hotelinformation__article #map {
   border: none;
@@ -358,7 +367,6 @@ input[type=radio] {
 
 .nomatch__title, .nomatch__text {
   text-align: center;
-  line-height: 1.5;
 }
 .nomatch__title {
   background: #FFBE0D;

@@ -2,6 +2,9 @@ import React from "react";
 import { Link, useHistory } from "react-router-dom";
 
 import AccountMenu from "./AccountMenu";
+import MessagesArticle from "./MessagesArticle";
+
+let messages = require("./contact.json");
 
 export default function Messages() {
     const history = useHistory();
@@ -21,6 +24,15 @@ export default function Messages() {
                 </ul>
             </div>
             <AccountMenu title="Messages"/>
+            <div className="messages">
+                {messages.map(index => 
+                    <MessagesArticle
+                    client={index["clientName"]}
+                    email={index["email"]}
+                    message={index["message"]}
+                    />)
+                }
+            </div>
         </div>
     )
 }

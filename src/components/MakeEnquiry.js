@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { 
     Link,
     useParams,
@@ -13,7 +13,9 @@ let establishments = require("./establishments.json");
 
 const schema = yup.object().shape({
 	clientName: yup.string().required("Name is required"),
-    email: yup.string().email("E-mail must be valid").required("E-mail is required")
+    email: yup.string().email("E-mail must be valid").required("E-mail is required"),
+    // fromDate: yup.number().required("Check-in date is required"),
+    // toDate: yup.number("Must be a number").required("Check-out date is required")
 });
 
 export default function MakeEnquiry() {
@@ -22,10 +24,6 @@ export default function MakeEnquiry() {
 
     const { register, handleSubmit, errors } = useForm({
         validationSchema: schema
-    });
-
-    let [state, setState] = useState({
-        data: []
     });
 
     let hotelId, fromDate, toDate;
@@ -38,7 +36,12 @@ export default function MakeEnquiry() {
         history.replace("/404");
     }
 
-    function onSubmit(data) {
+    let currentArticle = establishments.find(i =>
+        i.id === hotelId);
+
+    function onSubmit(data, event) {
+        //TODO: fjern preventdefault
+        event.preventDefault();
         console.log(data);
     }
 
@@ -61,21 +64,23 @@ export default function MakeEnquiry() {
                     className="col-12 makeenquiry__input makeenquiry__input--disabled" 
                     name="establishment"
                     type="text"
-                    value={hotelId}
+                    value={currentArticle.establishmentName}
                 /></label>
-                <label>Check-in
+                <label>Check-in <span>* </span>{errors.fromDate && <ErrorMessage text={errors.fromDate.message}/>}
                 <input
                     className="col-12 makeenquiry__input" 
                     name="checkin"
                     type="date"
-                    value={fromDate}
+                    defaultValue={fromDate}
+                    // ref={register({required:true})}
                 /></label>
-                <label>Check-out
+                <label>Check-out <span>* </span>{errors.toDate && <ErrorMessage text={errors.toDate.message}/>}
                 <input
                     className="col-12 makeenquiry__input" 
                     name="checkout"
                     type="date"
-                    value={toDate}
+                    defaultValue={toDate}
+                    // ref={register({required:true})}
                 /></label>
                 <h2>Contact information</h2>
                 <label>Full name <span>* </span>{errors.clientName && <ErrorMessage text={errors.clientName.message}/>}
@@ -85,7 +90,6 @@ export default function MakeEnquiry() {
                     type="text" 
                     placeholder="John Smith"
                     ref={register({required:true})}
-                    // defaultValue={search}
                     // onChange={(event) => updateInput(event, "search")}
                 /></label>
                 <label>E-mail <span>* </span>{errors.email && <ErrorMessage text={errors.email.message}/>}
@@ -93,9 +97,8 @@ export default function MakeEnquiry() {
                     className="col-12 makeenquiry__input"  
                     name="email"
                     type="text" 
-                    placeholder="js@gmail.com"
+                    placeholder="jonathan.smithsonian@gmail.com"
                     ref={register({required:true})}
-                    // defaultValue={search}
                     // onChange={(event) => updateInput(event, "search")}
                 /></label>
                 <button 
