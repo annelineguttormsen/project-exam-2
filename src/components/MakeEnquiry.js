@@ -40,9 +40,9 @@ export default function MakeEnquiry() {
     useEffect(
         function() {
             fetch("/establishments.json")
-            .then((response) => {
-               response = response.results.json();
-               console.log(response);
+            .then(response => response.json())
+            .then(responseJSON => {
+                console.log("response json er", responseJSON);
             })
             .catch(function(err) {
                 console.log("noe gikk galt", err);
