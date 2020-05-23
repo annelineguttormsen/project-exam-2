@@ -41,7 +41,7 @@ export default function MakeEnquiry() {
         function() {
             fetch("/establishments.json")
             .then((response) => {
-               response = response.json();
+               response.value = response.json();
                console.log(response);
             })
             .catch(function(err) {
