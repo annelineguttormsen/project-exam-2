@@ -23,7 +23,9 @@ export default function AccountMenu(props) {
                 menuRef.current.focus();
             });
         }
-        setState({active: !currentState});
+        setTimeout(() => {
+            setState({active: !currentState});
+        },10);
     }
 
     return (
