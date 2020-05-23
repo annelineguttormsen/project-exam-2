@@ -43,6 +43,10 @@ export default function MakeEnquiry() {
             .then(response => response.json())
             .then(responseJSON => {
                 console.log("response json er", responseJSON);
+                establishments = responseJSON;
+                currentArticle = responseJSON.find(i => 
+                    i.id === hotelId);
+                );
             })
             .catch(function(err) {
                 console.log("noe gikk galt", err);
