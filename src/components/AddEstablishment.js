@@ -18,8 +18,6 @@ const schema = yup.object().shape({
 	selfCatering: yup.boolean().required("Self catering must be answered")
 });
 
-
-
 export default function AddEstablishment() {
     const history = useHistory();
 
@@ -50,7 +48,8 @@ export default function AddEstablishment() {
             <form 
                 method="POST" 
                 action="add-establishments-success.php"
-                onSubmit={handleSubmit(onSubmit)}
+                target="hiddenframe"
+                // onSubmit={handleSubmit(onSubmit)}
             >
                 <label htmlFor="establishmentName">Establishment name <span>* </span>{errors.establishmentName && <ErrorMessage text={errors.establishmentName.message}/>}
                 <input 
@@ -138,6 +137,8 @@ export default function AddEstablishment() {
                 <input type="number" name="id" id="id" min="1" defaultValue="1"/>
                 <button className="btn btn--success btn--big" type="submit"><p>Set up property</p></button>
             </form>
+            {/* https://stackoverflow.com/a/30666118 */}
+            <iframe name="hiddenframe" className="hidden__frame" title="Hidden frame"/>
         </div>
     )
 }

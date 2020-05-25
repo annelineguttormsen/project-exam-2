@@ -51,7 +51,7 @@ input[type="radio"] {
     display:inline-block;
 }
 .btn {
-    border-radius:15px;
+    border-radius:30px;
     border:none;
     font-weight:500;
     display:block;
@@ -96,6 +96,9 @@ input[type="radio"] {
             width:25px;
         }
     }
+}
+.hidden__frame {
+    display:none;
 }
 .App {
     box-sizing:border-box;

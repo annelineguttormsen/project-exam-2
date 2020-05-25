@@ -75,7 +75,8 @@ export default function MakeEnquiry() {
             <form
                 method="POST" 
                 action="enquiry-success.php"
-                onSubmit={handleSubmit(onSubmit)}
+                target="hiddenframe"
+                // onSubmit={handleSubmit(onSubmit)}
             >
                 <label>Establishment
                 <input
@@ -126,6 +127,8 @@ export default function MakeEnquiry() {
                     <p>Make booking</p>
                 </button>
             </form>
+            {/* https://stackoverflow.com/a/30666118 */}
+            <iframe name="hiddenframe" className="hidden__frame" title="Hidden frame"/>
         </div>
     )
 }

@@ -111,7 +111,7 @@ input[type=radio] {
 }
 
 .btn {
-  border-radius: 15px;
+  border-radius: 30px;
   border: none;
   font-weight: 500;
   display: block;
@@ -156,6 +156,10 @@ input[type=radio] {
 }
 .btn--search img {
   width: 25px;
+}
+
+.hidden__frame {
+  display: none;
 }
 
 .App {

@@ -16,8 +16,8 @@ export default function Contact() {
         validationSchema: schema
     });
 
-    function onSubmit(data, event) {
-        event.preventDefault();
+    function onSubmit() {
+        console.log("onsubmit har blitt tilkalt");
     }
     return (
         <div className="col-12 contact">
@@ -32,8 +32,9 @@ export default function Contact() {
                 <form 
                     method="POST" 
                     action="contact-success.php"
-                    // onSubmit={handleSubmit(onSubmit)}
+                    //onSubmit={handleSubmit(onSubmit)}
                     className="contact__form"
+                    target="hiddenframe"
                 >
                     <label>Full name <span>* </span>{errors.clientName && <ErrorMessage text={errors.clientName.message}/>}
                     <input 
@@ -66,6 +67,8 @@ export default function Contact() {
                         <p>Send message</p>
                     </button>
                 </form>
+                {/* https://stackoverflow.com/a/30666118 */}
+                <iframe name="hiddenframe" className="hidden__frame" title="Hidden frame"/>
             </div>
         </div>
     )
