@@ -59,8 +59,15 @@ export default function Results() {
                 return i;
             }
         });
+        let adultsToNumber = parseInt(urlState.data["adults"]);
+        let childrenToNumber = parseInt(urlState.data["children"]);
+        console.log(adultsToNumber + childrenToNumber);
+        filteredArray = filteredArray.filter((i) => {
+            if (i.maxGuests >= (adultsToNumber + childrenToNumber)) {
+                return i;
+            }
+        });
         setState({establishmentData: filteredArray});
-        console.log("filteredArray er nå ", filteredArray);
     }
 
     //samme som på hero komponentet
@@ -96,8 +103,6 @@ export default function Results() {
             .then(()=> {
                 try {
                     filterArray();
-                    console.log("jeg filtrerer");
-                    console.log("for meg er state.establishmentData nå", state.establishmentData);
                 } catch {
                     history.replace("/404");
                 }
