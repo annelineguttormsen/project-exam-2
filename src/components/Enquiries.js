@@ -1,11 +1,21 @@
-import React from "react";
-import { Link, useHistory } from "react-router-dom";
+import React, { 
+    useState, 
+    useEffect 
+} from "react";
+import {
+    Link, 
+    useHistory 
+} from "react-router-dom";
 
 import AccountMenu from "./AccountMenu";
 import EnquiriesArticle from "./EnquiriesArticle";
 
 export default function Enquiries() {
     const history = useHistory();
+
+    const [state, setState] = useState({
+        enquiries: []
+    });
 
     //sjekk om bruker er logget inn
     if (localStorage.getItem("loggedIn")) {
@@ -14,8 +24,19 @@ export default function Enquiries() {
         history.replace("/login");
     }
 
-    let enquiries = require("./enquiries.json");
-    console.log(enquiries);
+    useEffect(
+        function() {
+            fetch("/enquiries.json")
+            .then(response => response.json())
+            .then(responseJSON => {
+                setState({enquiries: responseJSON});
+            })
+            .catch(function(err) {
+                console.log("noe gikk galt", err);
+            });
+        }, []
+    );
+
     return (
         <div className="col-6 col-md-8 col-sm-12 account container">
              <div className="col-12 breadcrumbs">
@@ -26,7 +47,7 @@ export default function Enquiries() {
             </div>
             <AccountMenu title="Enquiries"/>
             <div className="enquiries">
-                {enquiries.map(index => 
+                {state.enquiries.map(index => 
                     <EnquiriesArticle
                         property={index["establishment"]}
                         client={index["clientName"]}

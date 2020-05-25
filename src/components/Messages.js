@@ -1,13 +1,33 @@
-import React from "react";
-import { Link, useHistory } from "react-router-dom";
+import React, {
+    useState,
+    useEffect
+} from "react";
+import { 
+    Link, 
+    useHistory 
+} from "react-router-dom";
 
 import AccountMenu from "./AccountMenu";
 import MessagesArticle from "./MessagesArticle";
 
-let messages = require("./contact.json");
-
 export default function Messages() {
     const history = useHistory();
+    const [state, setState] = useState({
+        messages: []
+    });
+
+    useEffect(
+        function() {
+            fetch("/contact.json")
+            .then(response => response.json())
+            .then(responseJSON => {
+                setState({messages: responseJSON});
+            })
+            .catch(function(err) {
+                console.log("noe gikk galt", err);
+            });
+        }, []
+    );
 
     //sjekk om bruker er logget inn
     if (localStorage.getItem("loggedIn")) {
@@ -25,7 +45,7 @@ export default function Messages() {
             </div>
             <AccountMenu title="Messages"/>
             <div className="messages">
-                {messages.map(index => 
+                {state.messages.map(index => 
                     <MessagesArticle
                     client={index["clientName"]}
                     email={index["email"]}

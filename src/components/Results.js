@@ -10,7 +10,6 @@ import {
 
 import ResultsArticle from "./ResultsArticle";
 import searchIcon from "./../search.svg";
-let establishments = require("./establishments.json");
 
 export default function Results() {
     //hent parametre fra url og history fra react router dom 
@@ -18,7 +17,7 @@ export default function Results() {
     const history = useHistory();
 
     //globale variabler for params fra urlen
-    let search, fromDate, toDate, adults, children, url, cleanedUrl;
+    let search, fromDate, toDate, adults, children, url, cleanedUrl, constEstablishments;
 
     //hvis ingen av disse matcher så redirectes siden til 404
     try {
@@ -51,18 +50,17 @@ export default function Results() {
         }
     });
     
-    console.log("state data", state, urlState);
-
     //filtrer array basert på search i state.data
     //deretter oppdater establishmentdata som oppdaterer resultsarticles
     function filterArray() {
-        let filteredArray = establishments;
+        let filteredArray = constEstablishments;
         filteredArray = filteredArray.filter((i) => {
             if (i.establishmentName.toLowerCase().indexOf(urlState.data["search"].toLowerCase())!== -1) {
                 return i;
             }
         });
         setState({establishmentData: filteredArray});
+        console.log("filteredArray er nå ", filteredArray);
     }
 
     //samme som på hero komponentet
@@ -90,14 +88,24 @@ export default function Results() {
     console.log("cleaned url nå", urlState.data["cleanedUrl"]);
     useEffect( 
         function() {
-            setState({establishmentData: establishments});
-            setState({data: ""});
+            fetch("/establishments.json")
+            .then(response => response.json())
+            .then(responseJSON => {
+                constEstablishments = responseJSON;
+            })
+            .then(()=> {
+                try {
+                    filterArray();
+                    console.log("jeg filtrerer");
+                    console.log("for meg er state.establishmentData nå", state.establishmentData);
+                } catch {
+                    history.replace("/404");
+                }
+            })
+            .catch(function(err) {
+                console.log("noe gikk galt", err);
+            });
             //hvis search er tom || undefined så redirect til 404
-            try {
-                filterArray();
-            } catch {
-                history.replace("/404");
-            }
         },[]
     );
 

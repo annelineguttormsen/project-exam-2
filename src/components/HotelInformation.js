@@ -1,4 +1,7 @@
-import React from "react";
+import React, {
+    useEffect,
+    useState
+} from "react";
 import { 
     useParams,
     useHistory
@@ -9,32 +12,46 @@ let establishments = require("./establishments.json");
 
 export default function HotelInformation() {
     let { id } = useParams();
+    const [state, setState] = useState({
+        establishment: []
+    });
 
     const history = useHistory();
 
     let hotelId = id.match(/id=(.*)&fromDate/)[1];
 
-    let currentArticle = establishments.find(i =>
-        i.id === hotelId);
+    useEffect(
+        function() {
+            fetch("/establishments.json")
+            .then(response => response.json())
+            .then(responseJSON => {
+                let currentArticle = responseJSON.find(i => 
+                    i.id === hotelId
+                );
+                if (currentArticle === undefined) {
+                    history.replace("/404");
+                }
+                setState({establishment: currentArticle});
+            })
+            .catch(function(err) {
+                console.log("noe gikk galt", err);
+            });
+        }, []
+    );
 
-    if (currentArticle === undefined) {
-        history.replace("/404");
-        return null
-    } else {
-        return (
-            <div className="col-6 col-md-8 col-sm-12 hotelinformation container">
-                <HotelInformationArticle
-                    img={currentArticle.imageUrl}
-                    title={currentArticle.establishmentName}
-                    desc={currentArticle.description}
-                    price={currentArticle.price}
-                    maxGuests={currentArticle.maxGuests}
-                    selfCatering={currentArticle.selfCatering}
-                    email={currentArticle.establishmentEmail}
-                    // TODO: legg til koordinater
-                    id={currentArticle.id}
-                />
-            </div>
-        )
-    }
+    return (
+        <div className="col-6 col-md-8 col-sm-12 hotelinformation container">
+            <HotelInformationArticle
+                img={state.establishment.imageUrl}
+                title={state.establishment.establishmentName}
+                desc={state.establishment.description}
+                price={state.establishment.price}
+                maxGuests={state.establishment.maxGuests}
+                selfCatering={state.establishment.selfCatering}
+                email={state.establishment.establishmentEmail}
+                // TODO: legg til koordinater
+                id={state.establishment.id}
+            />
+        </div>
+    )
 }
