@@ -230,6 +230,9 @@ input[type=radio] {
   display: block;
   border-radius: 20px;
 }
+.hero p {
+  display: inline-block;
+}
 .hero label {
   color: white;
 }

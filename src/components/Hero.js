@@ -54,7 +54,7 @@ export default function Hero() {
             <div className="col-6 col-md-8 col-sm-12 container">
                 <h1 className="col-12 hero__title">Your first stop for hotels, cabins and more </h1>
                 <form /*onSubmit={handleSubmit}*/ className="col-12 hero__form">
-                    <label>Search</label>
+                    <label>Search
                     <input 
                         className="col-12 hero__form__input" 
                         placeholder="Hotel"
@@ -62,7 +62,9 @@ export default function Hero() {
                         type="text"
                         defaultValue={state.data["search"]}
                         onChange={(event) => updateInput(event, "search")}
-                    />
+                    /></label>
+                    <p className="col-6"><label>Check-in</label></p>
+                    <p className="col-6"><label>Check-out</label></p>
                     <input 
                         className="col-6 hero__form__input" 
                         placeholder="Date" 
@@ -79,6 +81,8 @@ export default function Hero() {
                         defaultValue= {state.data["toDate"]}
                         onChange={(event) => updateInput(event, "toDate")}
                     />
+                    <p className="col-6"><label>Adults</label></p>
+                    <p className="col-6"><label>Children</label></p>
                     <input 
                         className="col-6 hero__form__input" 
                         placeholder="Adults" 
