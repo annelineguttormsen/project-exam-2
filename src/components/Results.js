@@ -1,6 +1,6 @@
 import React, {
     useState, 
-    useEffect 
+    useEffect
 } from "react";
 import { 
     Link,
@@ -17,7 +17,7 @@ export default function Results() {
     const history = useHistory();
 
     //globale variabler for params fra urlen
-    let search, fromDate, toDate, adults, children, url, cleanedUrl, constEstablishments;
+    let search, fromDate, toDate, adults, children, url, cleanedUrl;
 
     //hvis ingen av disse matcher så redirectes siden til 404
     try {
@@ -35,9 +35,13 @@ export default function Results() {
         history.replace("/404");
     }
 
+    //state for establishments som skal vises på siden
     let [state, setState] = useState({
-        establishmentData: []
+        establishmentData: [],
     });
+    
+    //state for url params når siden laster inn og når
+    //small search input endres
     let [urlState, urlSetState] = useState({
         data: {
             search,
@@ -52,8 +56,8 @@ export default function Results() {
     
     //filtrer array basert på search i state.data
     //deretter oppdater establishmentdata som oppdaterer resultsarticles
-    function filterArray() {
-        let filteredArray = constEstablishments;
+    function filterArray(array) {
+        let filteredArray = state.establishmentData;
         filteredArray = filteredArray.filter((i) => {
             if (i.establishmentName.toLowerCase().indexOf(urlState.data["search"].toLowerCase())!== -1) {
                 return i;
@@ -61,13 +65,12 @@ export default function Results() {
         });
         let adultsToNumber = parseInt(urlState.data["adults"]);
         let childrenToNumber = parseInt(urlState.data["children"]);
-        console.log(adultsToNumber + childrenToNumber);
         filteredArray = filteredArray.filter((i) => {
             if (i.maxGuests >= (adultsToNumber + childrenToNumber)) {
                 return i;
             }
         });
-        setState({establishmentData: filteredArray});
+        return filteredArray;
     }
 
     //samme som på hero komponentet
@@ -89,28 +92,18 @@ export default function Results() {
             + "&toDate=" + data["toDate"]);
         
         urlSetState({data: data});
-        localStorage.setItem(event,index);
     }
 
-    console.log("cleaned url nå", urlState.data["cleanedUrl"]);
     useEffect( 
         function() {
             fetch("/establishments.json")
             .then(response => response.json())
-            .then(responseJSON => {
-                constEstablishments = responseJSON;
-            })
-            .then(()=> {
-                try {
-                    filterArray();
-                } catch {
-                    history.replace("/404");
-                }
-            })
+            .then(responseJSON => 
+                setState({establishmentData: responseJSON})
+            )
             .catch(function(err) {
                 console.log("noe gikk galt", err);
             });
-            //hvis search er tom || undefined så redirect til 404
         },[]
     );
 
@@ -136,7 +129,6 @@ export default function Results() {
                 <div className="col-12 small__search">
                     <form 
                         className="col-12 small__search__form"
-                        onSubmit ={filterArray}
                     >
                         <input 
                             className="col-12 small__search__form__input"  
@@ -192,7 +184,7 @@ export default function Results() {
                 <h1>Search results for '{search}'</h1>
                 <div className="col-12 results">
                     {
-                        state.establishmentData.map(
+                        filterArray(state.establishmentData).map(
                             i => <ResultsArticle
                                 establishmentName={i.establishmentName}
                                 price={i.price}
@@ -200,6 +192,7 @@ export default function Results() {
                                 img={i.imageUrl}
                                 url={urlState.data["cleanedUrl"]}
                                 id={i.id}
+                                key={i.id}
                             />
                         )
                     }
