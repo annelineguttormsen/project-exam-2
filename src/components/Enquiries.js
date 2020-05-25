@@ -18,7 +18,7 @@ export default function Enquiries() {
     });
 
     //sjekk om bruker er logget inn
-    if (localStorage.getItem("loggedIn")) {
+    if (localStorage.getItem("loggedIn") === "true") {
         console.log("Bruker er logget inn");
     } else {
         history.replace("/login");

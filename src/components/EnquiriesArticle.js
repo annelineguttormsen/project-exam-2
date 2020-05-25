@@ -3,6 +3,7 @@ import React from "react";
 export default function EnquiriesArticle(props) {
     return (
         <table className="col-12 enquiries__article">
+            <tbody>
             <tr>
                 <td><b>Property</b></td>
                 <td>{props.property}</td>
@@ -23,6 +24,7 @@ export default function EnquiriesArticle(props) {
                 <td><b>Check-out</b></td>
                 <td>{props.checkout}</td>
             </tr>
+            </tbody>
         </table>
     )
 }

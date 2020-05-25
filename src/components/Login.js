@@ -15,7 +15,7 @@ export default function Login() {
     const history = useHistory();
 
     //sjekk om bruker er logget inn
-    if (localStorage.getItem("loggedIn")) {
+    if (localStorage.getItem("loggedIn") === "true") {
         history.replace("/enquiries");
     } else {
         console.log("Ikke logget inn");

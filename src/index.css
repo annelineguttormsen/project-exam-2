@@ -320,6 +320,7 @@ input[type=radio] {
   display: block;
   padding: 15px 10px;
   text-align: right;
+  cursor: pointer;
 }
 .account__menu__list li a {
   text-decoration: none;

@@ -1,10 +1,17 @@
-import React, { useState, useRef } from "react";
-import { Link } from "react-router-dom";
+import React, {
+    useState, 
+    useRef 
+} from "react";
+import { 
+    Link,
+    useHistory
+} from "react-router-dom";
 
 import menuIcon from "./../menu_icon.svg";
 
 export default function AccountMenu(props) {
     const menuRef = useRef();
+    const history = useHistory();
     
     const [state, setState] = useState({
         active: false
@@ -30,6 +37,12 @@ export default function AccountMenu(props) {
         },10);
     }
 
+    function logOut() {
+        console.log("Logg ut");
+        localStorage.setItem("loggedIn", false);
+        history.replace("/login");
+    }
+
     return (
         <>
         <div className="col-12 account__menu">
@@ -51,7 +64,7 @@ export default function AccountMenu(props) {
                 <li><Link to="/enquiries">Enquiries</Link></li>
                 <li><Link to="/messages">Messages</Link></li>
                 <li><Link to="/addestablishment">Add establishment</Link></li>
-                <li><Link to="/addestablishment">Log out</Link></li>
+                <li onClick={logOut}>Log out</li>
             </ul>
         </div>
         </>
