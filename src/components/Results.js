@@ -9,7 +9,6 @@ import {
 } from "react-router-dom";
 
 import ResultsArticle from "./ResultsArticle";
-import searchIcon from "./../search.svg";
 
 export default function Results() {
     //hent parametre fra url og history fra react router dom 
@@ -130,13 +129,16 @@ export default function Results() {
                     <form 
                         className="col-12 small__search__form"
                     >
+                        <label>Search
                         <input 
                             className="col-12 small__search__form__input"  
                             type="text" 
                             placeholder="Hotel" 
                             defaultValue={search}
                             onChange={(event) => updateInput(event, "search")}
-                        />
+                        /></label>
+                        <p className="col-6"><label>Check-in</label></p>
+                        <p className="col-6"><label>Check-out</label></p>
                         <input 
                             className="col-6 small__search__form__input" 
                             type="date" 
@@ -149,8 +151,10 @@ export default function Results() {
                             defaultValue={toDate}
                             onChange={(event) => updateInput(event, "toDate")}
                         />
+                        <p className="col-6"><label>Adults</label></p>
+                        <p className="col-6"><label>Children</label></p>
                         <input 
-                            className="col-5 small__search__form__select" 
+                            className="col-6 small__search__form__select" 
                             type="number"
                             name="Adults"
                             min="1"
@@ -159,7 +163,7 @@ export default function Results() {
                             onChange={(event) => updateInput(event, "adults")}
                         />
                         <input 
-                            className="col-5 small__search__form__select" 
+                            className="col-6 small__search__form__select" 
                             type="number"
                             name="Children"
                             min="1"
@@ -169,14 +173,11 @@ export default function Results() {
                         />
                         <button
                             type="submit"
-                            className="btn btn--normal btn--search"
+                            className="col-xs-12 btn btn--normal btn--big"
                             onClick={filterArray}
                         >
                             <Link to={urlState.data["url"]}>
-                                <img 
-                                    src={searchIcon}
-                                    alt="Search icon"
-                                />
+                                Search
                             </Link>
                         </button>
                     </form>

@@ -81,21 +81,6 @@ input[type="radio"] {
             padding:5px 60px;
         }
     }
-    &--search {
-        display:inline-block;
-        margin-top:10px;
-        margin-left:10px;
-        width:40px;
-        height:40px;
-        border-radius:50%;
-        vertical-align:top;
-        a {
-            padding:0;
-        }
-        img {
-            width:25px;
-        }
-    }
 }
 .hidden__frame {
     display:none;
@@ -130,6 +115,7 @@ input[type="radio"] {
 }
 .breadcrumbs {
     border-bottom:1px solid $lightgray;
+    margin-bottom:10px;
     &__link {
         display:inline-block;
         padding:5px 7px;
@@ -190,6 +176,12 @@ input[type="radio"] {
    &__form {
        &__input, &__select {
            display:inline-block;
+       }
+       p {
+           display:inline-block;
+       }
+       .btn {
+           margin:0 auto;
        }
    }
 }

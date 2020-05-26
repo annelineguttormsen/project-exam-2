@@ -142,21 +142,6 @@ input[type=radio] {
   font-size: 24px;
   padding: 5px 60px;
 }
-.btn--search {
-  display: inline-block;
-  margin-top: 10px;
-  margin-left: 10px;
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  vertical-align: top;
-}
-.btn--search a {
-  padding: 0;
-}
-.btn--search img {
-  width: 25px;
-}
 
 .hidden__frame {
   display: none;
@@ -195,6 +180,7 @@ input[type=radio] {
 
 .breadcrumbs {
   border-bottom: 1px solid #ECECEC;
+  margin-bottom: 10px;
 }
 .breadcrumbs__link {
   display: inline-block;
@@ -250,6 +236,12 @@ input[type=radio] {
 
 .small__search__form__input, .small__search__form__select {
   display: inline-block;
+}
+.small__search__form p {
+  display: inline-block;
+}
+.small__search__form .btn {
+  margin: 0 auto;
 }
 
 .login__title {

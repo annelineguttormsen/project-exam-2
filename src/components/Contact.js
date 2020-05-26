@@ -16,8 +16,19 @@ export default function Contact() {
         validationSchema: schema
     });
 
-    function onSubmit() {
+    //https://www.pluralsight.com/guides/submit-form-react-without-jquery-ajax
+    function onSubmit(event) {
+        event.preventDefault();
         console.log("onsubmit har blitt tilkalt");
+    //     fetch(`https://jsonplaceholder.typicode.com/posts`, {
+    //         method: 'POST',
+    //         body: JSON.stringify(values),
+    //         headers: {
+    //             'Content-Type': 'application/json'
+    //         }
+    //     }).then(res => res.json())
+    //         .then(data => console.log(data))
+    //         .catch(err => console.error("Error:", err));
     }
     return (
         <div className="col-12 contact">
