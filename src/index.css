@@ -184,7 +184,7 @@ input[type=radio] {
 }
 .breadcrumbs__link {
   display: inline-block;
-  padding: 5px 7px;
+  padding: 5px 7px 5px 0px;
 }
 .breadcrumbs__link a {
   text-decoration: none;
@@ -192,6 +192,9 @@ input[type=radio] {
 }
 .breadcrumbs__link a :hover {
   text-decoration: underline;
+}
+.breadcrumbs__link span {
+  margin-right: 7px;
 }
 
 .hero {

@@ -91,6 +91,7 @@ export default function Results() {
             + "&toDate=" + data["toDate"]);
         
         urlSetState({data: data});
+        history.push(urlState.data["url"]);
     }
 
     useEffect( 
@@ -110,7 +111,7 @@ export default function Results() {
     //ved error redirect til 404
     let paramsArray = [search,fromDate,toDate,adults,children,url];
     let checkParams = paramsArray.find(i => 
-        i === undefined || i === ""
+        i === undefined
     );
 
     if (checkParams !== undefined) {
@@ -122,7 +123,7 @@ export default function Results() {
                 <div className="col-12 breadcrumbs">
                     <ul>
                         <li className="breadcrumbs__link"><Link to="/">Home</Link></li><span>></span>
-                        <li className="breadcrumbs__link"><Link to="/results">Search results</Link></li>
+                        <li className="breadcrumbs__link"><Link to={"/results/" + id}>Search results</Link></li>
                     </ul>
                 </div>
                 <div className="col-12 small__search">
