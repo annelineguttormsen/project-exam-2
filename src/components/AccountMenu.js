@@ -3,7 +3,6 @@ import React, {
     useRef 
 } from "react";
 import { 
-    Link,
     useHistory
 } from "react-router-dom";
 
@@ -19,6 +18,7 @@ export default function AccountMenu(props) {
 
     //https://stackoverflow.com/a/42630743
     function toggleClass() {
+        console.log("toggleclass tilkalt");
         const currentState = state.active;
         if (currentState === true) {
             setTimeout(function(){
@@ -30,17 +30,22 @@ export default function AccountMenu(props) {
                 menuRef.current.focus();
             });
         }
-        //vent litt før state endres så meny ikke forsvinner
-        //med en gang bruker trykker på en link og onblur trigges
-        setTimeout(() => {
-            setState({active: !currentState});
-        },10);
+        setState({active: !currentState})
     }
 
     function logOut() {
         console.log("Logg ut");
         localStorage.setItem("loggedIn", false);
         history.replace("/login");
+    }
+
+    //menyen forsvinner så fort at <Link> ikke fungerer
+    //og å sette timeout på setstate ødelegger toggleclass funksjonen
+    //og man kan ikke sette transition på display eller visibility
+    //det gjør meg trist for det ødelegger den smoothe animasjonen
+    function menuLink(url) {
+        history.push(url);
+        history.replace(url);
     }
 
     return (
@@ -61,10 +66,10 @@ export default function AccountMenu(props) {
                 onBlur={toggleClass}
                 tabIndex="1"
             >
-                <li><Link to="/enquiries">Enquiries</Link></li>
-                <li><Link to="/messages">Messages</Link></li>
-                <li><Link to="/addestablishment">Add establishment</Link></li>
-                <li onClick={logOut}>Log out</li>
+                <li onClick={() => menuLink("/enquiries")}>Enquiries</li>
+                <li onClick={() => menuLink("/messages")}>Messages</li>
+                <li onClick={() => menuLink("/addestablishment")}>Add establishment</li>
+                <li onClick={logOut}><span>Log out</span></li>
             </ul>
         </div>
         </>

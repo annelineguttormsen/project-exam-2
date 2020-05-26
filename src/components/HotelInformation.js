@@ -8,7 +8,6 @@ import {
 } from "react-router-dom";
 
 import HotelInformationArticle from "./HotelInformationArticle";
-let establishments = require("./establishments.json");
 
 export default function HotelInformation() {
     let { id } = useParams();

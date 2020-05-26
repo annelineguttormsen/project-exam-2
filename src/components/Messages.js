@@ -50,6 +50,7 @@ export default function Messages() {
                     client={index["clientName"]}
                     email={index["email"]}
                     message={index["message"]}
+                    key={index["clientName"]}
                     />)
                 }
             </div>

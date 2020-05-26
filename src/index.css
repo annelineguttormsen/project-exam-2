@@ -310,26 +310,32 @@ input[type=radio] {
   z-index: 1;
   border: 1px solid #ECECEC;
   border-top: none;
+  border-bottom: none;
   outline: none;
   top: 0;
   bottom: auto;
   visibility: visible;
+  opacity: 1;
 }
 .account__menu__list--hidden {
-  bottom: 0;
   top: auto;
+  opacity: 0;
   visibility: hidden;
 }
 .account__menu__list li {
   display: block;
   padding: 15px 10px;
   text-align: right;
+  border-bottom: 1px solid #ECECEC;
   cursor: pointer;
 }
 .account__menu__list li a {
   text-decoration: none;
   color: black;
   font-weight: 500;
+}
+.account__menu__list li span {
+  color: #F23827;
 }
 .account__menu__list--wrap {
   position: relative;

@@ -54,6 +54,7 @@ export default function Enquiries() {
                         email={index["email"]}
                         checkin={index["checkin"]}
                         checkout={index["checkout"]}
+                        key={index["clientName"]}
                     />)
                 }
             </div>
