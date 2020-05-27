@@ -193,7 +193,8 @@ input[type=radio] {
 .breadcrumbs__link a :hover {
   text-decoration: underline;
 }
-.breadcrumbs__link span {
+.breadcrumbs span {
+  display: inline-block;
   margin-right: 7px;
 }
 

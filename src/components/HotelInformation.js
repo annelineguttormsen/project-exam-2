@@ -14,7 +14,12 @@ export default function HotelInformation() {
     const [state, setState] = useState({
         establishment: []
     });
-
+    const [urlState, setUrlState] = useState({
+        data: {
+            searchParam: ""
+        }
+    });
+    
     const history = useHistory();
 
     let hotelId = id.match(/id=(.*)&fromDate/)[1];
@@ -30,6 +35,9 @@ export default function HotelInformation() {
                 if (currentArticle === undefined) {
                     history.replace("/404");
                 }
+                let search = currentArticle.establishmentName;
+                search = search.replace(/ /g, "_");
+                setUrlState({data: search});
                 setState({establishment: currentArticle});
             })
             .catch(function(err) {
@@ -48,7 +56,10 @@ export default function HotelInformation() {
                 maxGuests={state.establishment.maxGuests}
                 selfCatering={state.establishment.selfCatering}
                 email={state.establishment.establishmentEmail}
+                searchParam={urlState.data}
                 // TODO: legg til koordinater
+                long={state.establishment.googleLong}
+                lat={state.establishment.googleLat}
                 id={state.establishment.id}
             />
         </div>

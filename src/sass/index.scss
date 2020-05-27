@@ -126,9 +126,10 @@ input[type="radio"] {
                 text-decoration:underline;
             }
         }
-        span {
-            margin-right:7px;
-        }
+    }
+    span {
+        display:inline-block;
+        margin-right:7px;
     }
 }
 .hero {

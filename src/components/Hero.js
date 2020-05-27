@@ -99,7 +99,7 @@ export default function Hero() {
                         name="children"
                         defaultValue={state.data["children"]}
                         type="number" 
-                        min="1" 
+                        min="0" 
                         max="10"
                         onChange={(event) => updateInput(event, "children")}
                     />
