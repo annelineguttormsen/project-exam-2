@@ -157,6 +157,7 @@ export default function MakeEnquiry() {
                     name="establishment"
                     type="text"
                     value={state.ca["establishmentName"]}
+                    disabled
                     required
                 /></label>
                 <label>Check-in <span>* </span>{formErrors.errors.fromDate && <ErrorMessage text={"Check-in is required"}/>}
