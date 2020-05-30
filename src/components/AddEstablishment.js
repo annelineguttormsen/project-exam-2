@@ -1,22 +1,14 @@
-import React from "react";
-import { Link, useHistory } from "react-router-dom";
-import { useForm } from "react-hook-form";
-import * as yup from "yup";
+import React, {
+    useState,
+    useEffect
+} from "react";
+import { 
+    Link, 
+    useHistory 
+} from "react-router-dom";
 
 import ErrorMessage from "./ErrorMessage";
 import AccountMenu from "./AccountMenu";
-
-const schema = yup.object().shape({
-	establishmentName: yup.string().required("Title of establishment is required"),
-    establishmentEmail: yup.string().email("E-mail must be valid").required("E-mail is required"),
-    imageUrl: yup.string().required("URL is required"),
-    price: yup.number().typeError("Price must be a number").required("Price is required").positive(),
-    maxGuests: yup.number().typeError("Max number of guests must be a number").required("Max number of guests is required").positive(),
-    googleLat: yup.number().typeError("Google latitude must be a number").required("Google Latitude is required"),
-    googleLong: yup.number().typeError("Google longitude must be a number").required("Google Longitude is required"),
-    description: yup.string().required("Description is required"),
-	selfCatering: yup.boolean().required("Self catering must be answered")
-});
 
 export default function AddEstablishment() {
     const history = useHistory();
@@ -27,13 +19,154 @@ export default function AddEstablishment() {
     } else {
         history.replace("/login");
     }
-
-    const { register, handleSubmit, errors } = useForm({
-        validationSchema: schema
+    const [state, setState] = useState ({
+        id : 1
     });
 
+    const [formState,setFormState] = useState({
+        formSubmitted: false
+    });
+
+    const [formErrors, setFormErrors] = useState({
+        errors: {
+            establishment: false,
+            email: false,
+            imageUrl: false,
+            price: false,
+            maxGuests: false,
+            googleLat: false,
+            googleLong: false,
+            description: false,
+            selfCatering: false,
+            id: false
+        }
+    });
+
+    useEffect(
+        function() {
+            fetch("/establishments.json")
+            .then(response => response.json())
+            .then(responseJSON => {
+                let newId = responseJSON.length + 1;
+                setState({id: newId});
+            })
+            .catch(function(err) {
+                console.log("noe gikk galt", err);
+            });
+        }, []
+    );
+
+    function updateStateErrors(index, value) {
+        //kopier nåværende state objekt
+        //finn indexen til input som har tilkalt funksjonen
+        //deretter oppdater state.data kopien sin verdi
+        //(variabel heter det samme slik at objektet i state alltid heter data)
+        //https://stackoverflow.com/a/49502115
+        let data = formErrors.errors;
+        data[index] = value;
+        
+        //oppdater state med ny data array
+        setFormErrors({errors: data});
+    }
+    
     function onSubmit(event) {
-        console.log(event);
+        //email regex hentet fra http://regexlib.com/displaypatterns.aspx
+        let emailRegex = /^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$/;
+        let numberRegex = /^\d{1,3}(\.|\,)*\d*$/;
+        let intRegex = /^\d{1,3}$/;
+        
+        //establishmentname
+        if (event.target[0].value === undefined || event.target[0].value === "") {
+            event.preventDefault();
+            updateStateErrors("establishment", true);
+            return false
+        } else {
+            if (formErrors.errors.establishment) {
+                updateStateErrors("establishment", false);
+            }
+        }
+        //epost
+        if (!emailRegex.test(event.target[1].value)) {
+            event.preventDefault();
+            updateStateErrors("email", true);
+            return false
+        } else {
+            if (formErrors.errors.email) {
+                updateStateErrors("email", false);
+            }
+        }
+        //imageurl
+        if (event.target[2].value === undefined || event.target[2].value === "") {
+            event.preventDefault();
+            updateStateErrors("imageUrl", true);
+            return false
+        } else {
+            if (formErrors.errors.imageUrl) {
+                updateStateErrors("imageUrl", false);
+            }
+        }
+        //price
+        if (!numberRegex.test(event.target[3].value)) {
+            event.preventDefault();
+            updateStateErrors("price", true);
+            return false
+        } else {
+            if (formErrors.errors.price) {
+                updateStateErrors("price", false);
+            }
+        }
+        //maxguests
+        if (!intRegex.test(event.target[4].value)) {
+            event.preventDefault();
+            updateStateErrors("maxGuests", true);
+            return false
+        } else {
+            if (formErrors.errors.maxGuests) {
+                updateStateErrors("maxGuests", false);
+            }
+        }
+        //googlelat
+        if (!numberRegex.test(event.target[5].value)) {
+            event.preventDefault();
+            updateStateErrors("googleLat", true);
+            return false
+        } else {
+            if (formErrors.errors.googleLat) {
+                updateStateErrors("googleLat", false);
+            }
+        }
+        //googlelong
+        if (!numberRegex.test(event.target[6].value)) {
+            event.preventDefault();
+            updateStateErrors("googleLong", true);
+            return false
+        } else {
+            if (formErrors.errors.googleLong) {
+                updateStateErrors("googleLong", false);
+            }
+        }
+        //description
+        if (event.target[7].value === undefined || event.target[7].value === "") {
+            event.preventDefault();
+            updateStateErrors("description", true);
+            return false
+        } else {
+            if (formErrors.errors.description) {
+                updateStateErrors("description", false);
+            }
+        }
+        if (event.target[8].checked === false && event.target[9].checked === false) {
+            event.preventDefault();
+            updateStateErrors("selfCatering", true);
+            return false
+        } else {
+            if (formErrors.errors.selfCatering) {
+                updateStateErrors("selfCatering", false);
+            }
+        }
+        setTimeout(function() {
+            setFormState({formSubmitted: true});
+        },100);
     }
 
     return (
@@ -45,83 +178,85 @@ export default function AddEstablishment() {
                 </ul>
             </div>
             <AccountMenu title="Add Establishment"/>
+            {formState.formSubmitted ? 
+            <>
+            <h1>Property successfully added</h1>
+            <p></p>
+            </>
+            :
+            <>
             <form 
                 method="POST" 
-                action="add-establishments-success.php"
+                action="/add-establishments-success.php"
                 target="hiddenframe"
-                // onSubmit={handleSubmit(onSubmit)}
+                onSubmit={onSubmit}
             >
-                <label htmlFor="establishmentName">Establishment name <span>* </span>{errors.establishmentName && <ErrorMessage text={errors.establishmentName.message}/>}
+                <label htmlFor="establishmentName">Establishment name <span>* </span>{formErrors.errors.establishment && <ErrorMessage text={"Establishment name is required"}/>}
                 <input 
                     className="col-12" 
                     type="text" 
                     name="establishmentName" 
                     id="establishmentName"
-                    ref={register({required:true})}
                 /></label>
-                <label htmlFor="establishmentEmail">Establishment e-mail <span>* </span>{errors.establishmentEmail && <ErrorMessage text={errors.establishmentEmail.message}/>}
+                <label htmlFor="establishmentEmail">Establishment e-mail <span>* </span>{formErrors.errors.email && <ErrorMessage text={"E-mail is required and must be valid"}/>}
                 <input 
                     className="col-12" 
                     type="text" 
                     name="establishmentEmail" 
                     id="establishmentEmail"
-                    ref={register({required:true})}
                 /></label>
-                <label htmlFor="imageUrl">Image URL <span>* </span>{errors.imageUrl && <ErrorMessage text={errors.imageUrl.message}/>}
+                <label htmlFor="imageUrl">Image URL <span>* </span>{formErrors.errors.imageUrl && <ErrorMessage text={"Image URL is required"}/>}
                 <input 
                     className="col-12" 
                     type="text" 
                     name="imageUrl" 
                     id="imageUrl"
-                    ref={register({required:true})}
                 /></label>
-                <label htmlFor="price">Price per person per night <span>* </span>{errors.price && <ErrorMessage text={errors.price.message}/>}
+                <label htmlFor="price">Price per person per night <span>* </span>{formErrors.errors.price && <ErrorMessage text={"Price is required and must be a number"}/>}
                 <input 
                     className="col-12" 
                     type="text" 
                     name="price" 
                     id="price"
-                    ref={register({required:true})}
                 /></label>
-                <label htmlFor="maxGuests">Maximum number of guests <span>* </span>{errors.maxGuests && <ErrorMessage text={errors.maxGuests.message}/>}
+                <label htmlFor="maxGuests">Maximum number of guests <span>* </span>{formErrors.errors.maxGuests && <ErrorMessage text={"Number of guests is required and must be a whole number"}/>}
                 <input 
                     className="col-12" 
                     type="text" 
                     name="maxGuests" 
                     id="maxGuests"
-                    ref={register({required:true})}
                 /></label>
-                <label htmlFor="googleLat">Google Maps coordinates latitude <span>* </span>{errors.googleLat && <ErrorMessage text={errors.googleLat.message}/>}
+                <label htmlFor="googleLat">Google Maps coordinates latitude <span>* </span>{formErrors.errors.googleLat && <ErrorMessage text={"Latitude is required and must be a number"}/>}
                 <input 
                     className="col-12" 
                     type="text" 
                     name="googleLat" 
                     id="googleLat"
-                    ref={register({required:true})}
                 /></label>
-                <label htmlFor="googleLong">Google Maps coordinates longitude <span>* </span>{errors.googleLong && <ErrorMessage text={errors.googleLong.message}/>}
+                <label htmlFor="googleLong">Google Maps coordinates longitude <span>* </span>{formErrors.errors.googleLong && <ErrorMessage text={"Longitude is required and must be a number"}/>}
                 <input 
                     className="col-12" 
                     type="text" 
                     name="googleLong" 
                     id="googleLong"
-                    ref={register({required:true})}
                 /></label>
-                <label htmlFor="description">Property description <span>* </span>{errors.description && <ErrorMessage text={errors.description.message}/>}
+                <label htmlFor="description">Property description <span>* </span>{formErrors.errors.description && <ErrorMessage text={"Description is required"}/>}
                 <textarea 
                     className="col-12" 
                     name="description" 
                     id="description"
-                    ref={register({required:true})}
                 /></label>
-                <label>Does your property offer self catering? <span>* </span></label>{errors.selfCatering && <ErrorMessage text={errors.selfCatering.message}/>}
+                <label>Does your property offer self catering? <span>* </span>{formErrors.errors.selfCatering && <ErrorMessage text={"Self catering must be filled out"}/>}
+                </label>
                 <br/>
                 <label>
                     <input 
                         type="radio" 
                         name="selfCatering" 
                         id="true" 
-                        value="true"/>Yes
+                        value="true"
+                        checked
+                    />Yes
                 </label>
                 <label>
                     <input 
@@ -131,12 +266,17 @@ export default function AddEstablishment() {
                         value="false"
                     />No
                 </label>
-                
                 <br/>
-                <label>ID</label>
-                <input type="number" name="id" id="id" min="1" defaultValue="1"/>
+                <input 
+                    type="hidden" 
+                    name="id" 
+                    id="id" 
+                    value={state.id}
+                />
                 <button className="btn btn--success btn--big" type="submit"><p>Set up property</p></button>
             </form>
+            </>
+            }
             {/* https://stackoverflow.com/a/30666118 */}
             <iframe name="hiddenframe" className="hidden__frame" title="Hidden frame"/>
         </div>

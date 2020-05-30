@@ -350,6 +350,7 @@ input[type=radio] {
   background: white;
   border: 1px solid #ECECEC;
   color: #AFAFAF;
+  pointer-events: none;
 }
 
 .messages__article {
