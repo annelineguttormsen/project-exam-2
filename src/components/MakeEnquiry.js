@@ -192,7 +192,7 @@ export default function MakeEnquiry() {
                     placeholder="jonathan.smithsonian@gmail.com"
                 /></label>
                 <button 
-                    className="btn btn--success"
+                    className="btn btn--success btn--big"
                     type="submit"
                 >
                     <p>Make booking</p>

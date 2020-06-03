@@ -185,6 +185,7 @@ export default function AddEstablishment() {
             </>
             :
             <>
+            <br/>
             <form 
                 method="POST" 
                 action="/add-establishments-success.php"
