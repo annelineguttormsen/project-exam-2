@@ -78,12 +78,12 @@ ul {
   list-style-type: none;
 }
 
-p, b, label {
+p, a, b, label {
   font-size: 16px;
   font-family: "Karla";
   line-height: 1.5;
 }
-p span, b span, label span {
+p span, a span, b span, label span {
   color: #F23827;
   font-weight: 700;
 }
@@ -95,6 +95,7 @@ input, select, textarea {
   background: #ECECEC;
   padding: 10px;
   margin: 10px 0px;
+  border-radius: 0px;
 }
 
 textarea {
@@ -103,6 +104,10 @@ textarea {
 
 input[type=radio] {
   display: inline-block;
+}
+
+.label__radio {
+  padding-right: 10px;
 }
 
 .errormessage {
@@ -120,7 +125,7 @@ input[type=radio] {
   font-size: 20px;
   text-decoration: none;
   display: block;
-  padding: 5px 40px;
+  padding: 0px 40px;
   color: white;
 }
 .btn--normal {
@@ -140,7 +145,7 @@ input[type=radio] {
 }
 .btn--big a, .btn--big p {
   font-size: 24px;
-  padding: 5px 60px;
+  padding: 0px 60px;
 }
 
 .hidden__frame {
@@ -176,6 +181,7 @@ input[type=radio] {
 }
 .header__btn a {
   color: #1794D5;
+  font-weight: 700;
 }
 
 .breadcrumbs {
@@ -229,6 +235,7 @@ input[type=radio] {
 }
 .hero label {
   color: white;
+  text-shadow: 0px 0px 10px black;
 }
 
 .contact__form__textarea {
@@ -271,7 +278,7 @@ input[type=radio] {
   width: 100%;
 }
 .results__article__desc {
-  padding: 0px 10px;
+  padding: 10px;
   vertical-align: top;
   display: inline-block;
 }
@@ -339,11 +346,12 @@ input[type=radio] {
 }
 
 .enquiries__article {
-  padding: 7px 0px;
-  border-bottom: 1px solid #ECECEC;
+  padding: 7px;
+  border: 1px solid #ECECEC;
+  border-top: none;
 }
-.enquiries__article td {
-  padding: 5px 7px 5px 0px;
+.enquiries__article p, .enquiries__article b {
+  padding: 5px 0px;
 }
 
 .makeenquiry__input--disabled {
@@ -371,6 +379,7 @@ input[type=radio] {
 .hotelinformation__article #map {
   border: none;
   margin: 10px 0px;
+  height: 300px;
 }
 .hotelinformation__article .btn {
   text-align: center;

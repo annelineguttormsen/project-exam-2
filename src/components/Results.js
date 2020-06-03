@@ -21,8 +21,10 @@ export default function Results() {
     //hvis ingen av disse matcher så redirectes siden til 404
     try {
         search = id.match(/search=(.*)&fromDate/)[1];
+        console.log("search før _", search);
         //bytt _ til mellomrom
         search = search.replace(/_/g, " ");
+        console.log("search etter _", search);
         fromDate = id.match(/fromDate=(.*)&toDate/)[1];
         toDate = id.match(/toDate=(.*)&adults/)[1];
         adults = id.match(/adults=(.*)&children/)[1];
@@ -138,22 +140,24 @@ export default function Results() {
                             defaultValue={search}
                             onChange={(event) => updateInput(event, "search")}
                         /></label>
-                        <p className="col-6"><label>Check-in</label></p>
-                        <p className="col-6"><label>Check-out</label></p>
+                        <p className="col-6"><label htmlFor="fromdate">Check-in</label></p>
+                        <p className="col-6"><label htmlFor="todate">Check-out</label></p>
                         <input 
                             className="col-6 small__search__form__input" 
                             type="date" 
+                            name="fromdate"
                             defaultValue={fromDate}
                             onChange={(event) => updateInput(event, "fromDate")}
                         />
                         <input 
                             className="col-6 small__search__form__input" 
                             type="date" 
+                            name="todate"
                             defaultValue={toDate}
                             onChange={(event) => updateInput(event, "toDate")}
                         />
-                        <p className="col-6"><label>Adults</label></p>
-                        <p className="col-6"><label>Children</label></p>
+                        <p className="col-6"><label htmlFor="adults">Adults</label></p>
+                        <p className="col-6"><label htmlFor="children">Children</label></p>
                         <input 
                             className="col-6 small__search__form__select" 
                             type="number"

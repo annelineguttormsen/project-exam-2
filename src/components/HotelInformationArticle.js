@@ -5,6 +5,8 @@ import {
     useHistory
 } from "react-router-dom";
 
+import Map from "./Map.js";
+
 export default function HotelInformationArticle(props) {
     let { id } = useParams();
     const history = useHistory();
@@ -22,8 +24,6 @@ export default function HotelInformationArticle(props) {
     } catch(err) {
         history.replace("/404");
     }
-
-    let opsUrl = "http://www.openstreetmap.org/export/embed.html?bbox=" + props.long + "%2C" + props.lat + "%2C" + props.long + "%2C" + props.lat + "&amp;layer=mapnik&amp;marker=" + (props.lat + 1) + "%2C" + (props.long + 1);
 
     return (
         <>
@@ -50,15 +50,8 @@ export default function HotelInformationArticle(props) {
             <p className="hotelinformation__article__text">
                 <b>Establishment e-mail:</b> <a href={props.email}>{props.email}</a>
             </p>
-            <iframe 
-                title="Map" 
-                id="map" 
-                className="col-12" 
-                height="350" 
-                scrolling="no" 
-                src={opsUrl}
-            />
-            <button className="btn btn--success btn--big">
+            <Map lat={props.lat} long={props.long}/>
+            <button className="col-xs-12 btn btn--success btn--big">
                 <Link to={"/makeenquiry/" + id}>Reserve</Link>
             </button>
         </div>

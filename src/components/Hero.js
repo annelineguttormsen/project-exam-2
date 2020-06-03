@@ -10,15 +10,19 @@ export default function Hero() {
         mm = "0" + mm.toString();
     }
     let dd = now.getDate();
+    if (dd < 10) {
+        dd = "0" + dd.toString();
+    }
+    let fromDateDefaultValue = yyyy + "-" + mm + "-" + dd;
 
     let [state, setState] = useState({
         data: {
             search: "Sunsssset Beach",
-            fromDate: yyyy + "-" + mm + "-" + dd,
-            toDate: yyyy + "-" + mm + "-" + dd,
+            fromDate: fromDateDefaultValue,
+            toDate: fromDateDefaultValue,
             adults: 2,
             children: 1,
-            url: "/results/search=Sunsssset_Beach&fromDate=2020-05-20&toDate=2020-05-20&adults=2&children=1"
+            url: "/results/search=Sunsssset_Beach&fromDate=" + fromDateDefaultValue + "&toDate=" + fromDateDefaultValue + "&adults=2&children=1"
         }
     });
 
@@ -43,10 +47,8 @@ export default function Hero() {
             + "&adults=" + data["adults"]
             + "&children=" + data["children"]);
         
-        //oppdater state deretter state
+        //oppdater state
         setState({data: data});
-
-        localStorage.setItem(event,index);
     }
 
     return (
@@ -63,14 +65,14 @@ export default function Hero() {
                         defaultValue={state.data["search"]}
                         onChange={(event) => updateInput(event, "search")}
                     /></label>
-                    <p className="col-6"><label>Check-in</label></p>
-                    <p className="col-6"><label>Check-out</label></p>
+                    <p className="col-6"><label htmlFor="fromDate">Check-in</label></p>
+                    <p className="col-6"><label htmlFor="toDate">Check-out</label></p>
                     <input 
                         className="col-6 hero__form__input" 
                         placeholder="Date" 
                         name="fromDate"
                         type="date"
-                        defaultValue= {state.data["fromDate"]}
+                        defaultValue={state.data["fromDate"]}
                         onChange={(event) => updateInput(event, "fromDate")}
                     />
                     <input 
@@ -78,11 +80,11 @@ export default function Hero() {
                         placeholder="Date" 
                         name="toDate"
                         type="date"
-                        defaultValue= {state.data["toDate"]}
+                        defaultValue={state.data["toDate"]}
                         onChange={(event) => updateInput(event, "toDate")}
                     />
-                    <p className="col-6"><label>Adults</label></p>
-                    <p className="col-6"><label>Children</label></p>
+                    <p className="col-6"><label htmlFor="adults">Adults</label></p>
+                    <p className="col-6"><label htmlFor="children">Children</label></p>
                     <input 
                         className="col-6 hero__form__input" 
                         placeholder="Adults" 

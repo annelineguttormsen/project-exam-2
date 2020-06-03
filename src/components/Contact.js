@@ -118,7 +118,7 @@ export default function Contact() {
                     /></label>
                     <button 
                         type="submit" 
-                        className="btn btn--success btn--big contact__form__btn"
+                        className="col-xs-12 btn btn--success btn--big contact__form__btn"
                     >
                         <p>Send message</p>
                     </button>

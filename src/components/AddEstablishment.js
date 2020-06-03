@@ -249,16 +249,15 @@ export default function AddEstablishment() {
                 <label>Does your property offer self catering? <span>* </span>{formErrors.errors.selfCatering && <ErrorMessage text={"Self catering must be filled out"}/>}
                 </label>
                 <br/>
-                <label>
+                <label className="label__radio">
                     <input 
                         type="radio" 
                         name="selfCatering" 
                         id="true" 
                         value="true"
-                        checked
                     />Yes
                 </label>
-                <label>
+                <label className="label__radio">
                     <input 
                         type="radio" 
                         name="selfCatering" 

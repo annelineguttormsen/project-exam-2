@@ -1,3 +1,5 @@
 # Prosjekteksamen 2
 
-[Du kan se nettsiden på Netlify her](#), ellers kan du bruke `npm i` og deretter `npm start` for å se siden i din egen nettleser. 
+Prosjekt som skal etterligne en nettside for søking etter hotell og andre fasiliteter hvor en kan overnatte. For beste opplevelse kan build mappen åpnes på en lokal server men den er også tilgjengelig på Netlify (uten php funksjonalitet).
+
+[Netlify versjon](https://dreamy-hamilton-c671df.netlify.app/)

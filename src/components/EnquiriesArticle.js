@@ -2,29 +2,12 @@ import React from "react";
 
 export default function EnquiriesArticle(props) {
     return (
-        <table className="col-12 enquiries__article">
-            <tbody>
-            <tr>
-                <td><b>Property</b></td>
-                <td>{props.property}</td>
-            </tr>
-            <tr>
-                <td><b>Client</b></td>
-                <td>{props.client}</td>
-            </tr>
-            <tr>
-                <td><b>E-mail</b></td>
-                <td>{props.email}</td>
-            </tr>
-            <tr>
-                <td><b>Check-in</b></td>
-                <td>{props.checkin}</td>
-            </tr>
-            <tr>
-                <td><b>Check-out</b></td>
-                <td>{props.checkout}</td>
-            </tr>
-            </tbody>
-        </table>
+        <div className="col-12 enquiries__article">
+            <p><b>Property: </b>{props.property}</p>
+            <p><b>Client: </b>{props.client}</p>
+            <p><b>E-mail: </b>{props.email}</p>
+            <p><b>Check-in: </b>{props.checkin}</p>
+            <p><b>Check-out: </b>{props.checkout}</p>
+        </div>
     )
 }
