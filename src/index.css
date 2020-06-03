@@ -129,10 +129,13 @@ input[type=radio] {
   color: white;
 }
 .btn--normal {
-  background: #1794D5;
+  background: #1179B0;
 }
 .btn--success {
   background: #43D55B;
+}
+.btn--success a, .btn--success p {
+  text-shadow: 0px 0px 2px #AFAFAF;
 }
 .btn--alert {
   background: #FFBE0D;
@@ -168,6 +171,8 @@ input[type=radio] {
 
 .header {
   box-shadow: 0px 2px 10px #ECECEC;
+  position: relative;
+  z-index: 1;
 }
 .header__logo {
   height: 25px;
@@ -175,12 +180,12 @@ input[type=radio] {
 .header__btn {
   float: right;
   background: white;
-  border: 2px solid #1794D5;
+  border: 2px solid #1179B0;
   margin-top: -5px;
   border-radius: 0px;
 }
 .header__btn a {
-  color: #1794D5;
+  color: #1179B0;
   font-weight: 700;
 }
 
@@ -205,13 +210,15 @@ input[type=radio] {
 }
 
 .hero {
-  background: url("hero_background.jpg") no-repeat center center;
+  background: url("https://images.unsplash.com/photo-1439130490301-25e322d88054?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1489&q=80") no-repeat center center;
   background-size: cover;
   padding-top: 100px;
   padding-bottom: 100px;
+  position: relative;
+  z-index: 2;
 }
 .hero__title {
-  text-shadow: 0px 0px 10px black;
+  text-shadow: 0px 0px 5px black;
   text-align: center;
   margin: 20px auto;
   color: white;
@@ -235,7 +242,11 @@ input[type=radio] {
 }
 .hero label {
   color: white;
-  text-shadow: 0px 0px 10px black;
+  text-shadow: 0px 0px 3px black;
+}
+
+.labelxs--visible {
+  display: none;
 }
 
 .contact__form__textarea {
@@ -393,7 +404,9 @@ input[type=radio] {
 }
 
 .footer {
-  background: #ECECEC;
+  box-shadow: 2px 0px 10px #ECECEC;
+  position: relative;
+  z-index: 1;
 }
 .footer__logo {
   height: 25px;
@@ -615,6 +628,14 @@ input[type=radio] {
   }
   .header__btn {
     display: none;
+  }
+
+  .labelxs--hidden {
+    display: none;
+  }
+
+  .labelxs--visible {
+    display: block;
   }
 }
 

@@ -66,17 +66,18 @@ export default function Hero() {
                         onChange={(event) => updateInput(event, "search")}
                     /></label>
                     <p className="col-6"><label htmlFor="fromDate">Check-in</label></p>
-                    <p className="col-6"><label htmlFor="toDate">Check-out</label></p>
+                    <p className="col-6"><label className="labelxs--hidden" htmlFor="toDate">Check-out</label></p>
                     <input 
-                        className="col-6 hero__form__input" 
+                        className="col-6 col-xs-12 hero__form__input" 
                         placeholder="Date" 
                         name="fromDate"
                         type="date"
                         defaultValue={state.data["fromDate"]}
                         onChange={(event) => updateInput(event, "fromDate")}
                     />
+                    <label className="labelxs--visible" htmlFor="toDate">Check-out</label>
                     <input 
-                        className="col-6 hero__form__input" 
+                        className="col-6 col-xs-12 hero__form__input" 
                         placeholder="Date" 
                         name="toDate"
                         type="date"
@@ -84,9 +85,9 @@ export default function Hero() {
                         onChange={(event) => updateInput(event, "toDate")}
                     />
                     <p className="col-6"><label htmlFor="adults">Adults</label></p>
-                    <p className="col-6"><label htmlFor="children">Children</label></p>
+                    <p className="col-6"><label className="labelxs--hidden" htmlFor="children">Children</label></p>
                     <input 
-                        className="col-6 hero__form__input" 
+                        className="col-6 col-xs-12 hero__form__input" 
                         placeholder="Adults" 
                         name="adults"
                         type="number" 
@@ -95,8 +96,9 @@ export default function Hero() {
                         max="10"
                         onChange={(event) => updateInput(event, "adults")}
                     />
+                    <label className="labelxs--visible" htmlFor="children">Children</label>
                     <input 
-                        className="col-6 hero__form__input" 
+                        className="col-6 col-xs-12 hero__form__input" 
                         placeholder="Children" 
                         name="children"
                         defaultValue={state.data["children"]}
