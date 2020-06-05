@@ -141,25 +141,26 @@ export default function Results() {
                             onChange={(event) => updateInput(event, "search")}
                         /></label>
                         <p className="col-6"><label htmlFor="fromdate">Check-in</label></p>
-                        <p className="col-6"><label htmlFor="todate">Check-out</label></p>
+                        <p className="col-6"><label className="labelxs--hidden" htmlFor="todate">Check-out</label></p>
                         <input 
-                            className="col-6 small__search__form__input" 
+                            className="col-6 col-xs-12 small__search__form__input" 
                             type="date" 
                             name="fromdate"
                             defaultValue={fromDate}
                             onChange={(event) => updateInput(event, "fromDate")}
                         />
+                        <label className="labelxs--visible" htmlFor="todate">Check-out</label>
                         <input 
-                            className="col-6 small__search__form__input" 
+                            className="col-6 col-xs-12 small__search__form__input" 
                             type="date" 
                             name="todate"
                             defaultValue={toDate}
                             onChange={(event) => updateInput(event, "toDate")}
                         />
                         <p className="col-6"><label htmlFor="adults">Adults</label></p>
-                        <p className="col-6"><label htmlFor="children">Children</label></p>
+                        <p className="col-6"><label className="labelxs--hidden" htmlFor="children">Children</label></p>
                         <input 
-                            className="col-6 small__search__form__select" 
+                            className="col-6 col-xs-12 small__search__form__select" 
                             type="number"
                             name="Adults"
                             min="1"
@@ -167,8 +168,9 @@ export default function Results() {
                             defaultValue={adults}
                             onChange={(event) => updateInput(event, "adults")}
                         />
+                        <label className="labelxs--visible" htmlFor="children">Children</label>
                         <input 
-                            className="col-6 small__search__form__select" 
+                            className="col-6 col-xs-12 small__search__form__select" 
                             type="number"
                             name="Children"
                             min="1"
